@@ -1,0 +1,27 @@
+{
+  "name": "pagopa-dashboard-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "cssnano": "^4.1.10",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "typescript": "^4.0.5"
+  },
+  "scripts": {
+    "dev": "parcel src/index.html --out-dir build/debug",
+    "build": "parcel build src/index.html --out-dir build/release --public-url ./"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "msal": "^1.4.4",
+    "react-router-dom": "^5.2.0",
+    "reactstrap": "^8.7.1",
+    "typeface-lora": "^1.1.13",
+    "typeface-roboto-mono": "^1.1.13",
+    "typeface-titillium-web": "^1.1.13"
+  }
+}

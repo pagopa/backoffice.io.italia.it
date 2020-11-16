@@ -1,0 +1,31 @@
+.MetodiPagamento__list {
+    border-bottom: none !important;
+}
+.MetodiPagamento__list li {
+    cursor: pointer;
+    margin-right: .5rem;
+}
+.MetodiPagamento__list  a { 
+    border-radius: .5rem !important;
+    border: 1px solid #ddd !important;
+
+}
+.MetodiPagamento__list  a.active {
+    border-bottom-color: transparent !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+.MetodiPagamento__stato {
+    position: absolute;
+    z-index: 1000;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 30px 30px 0 0;
+    border-color: #b12d2d transparent transparent transparent;
+    top: 0;
+    left: 0;
+}
+.MetodiPagamento__stato.attivo {
+    border-color: #37a51b transparent transparent transparent;
+}

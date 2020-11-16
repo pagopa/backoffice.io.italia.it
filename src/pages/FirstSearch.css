@@ -1,0 +1,5 @@
+@media screen and (min-width: 991px) {
+    .FirstSearch__form {
+        max-width: 50%;
+    }
+}
