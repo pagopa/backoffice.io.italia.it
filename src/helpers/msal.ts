@@ -15,15 +15,27 @@ interface MsalConfig {
     clientID: string;
     redirectUri?: string;
     validateAuthority?: boolean;
+    postLogoutRedirectUri?: string;
 }
+const configuration : MsalConfig = {
+  "audience": "https://iobackoffice.b2clogin.com/iobackoffice.onmicrosoft.com/c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06",
+  "authority": "https://iobackoffice.b2clogin.com/iobackoffice.onmicrosoft.com/B2C_1_backoffice",
+  "b2cScopes": ["https://iobackoffice.onmicrosoft.com/c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06/ProfileRead"],
+  "changePasswordLink": "",
+  "clientID": "c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06",
+  "redirectUri": window.location.origin,
+  "validateAuthority": false,
+  "postLogoutRedirectUri": window.location.origin+"/#/logout"
+};
 
-export function getUserAgentApplication(configuration: MsalConfig) {
+export function getUserAgentApplication() {
   return new UserAgentApplication({
     auth: {
       clientId: configuration.clientID,
       authority: configuration.authority,
       redirectUri: configuration.redirectUri,
-      validateAuthority: configuration.validateAuthority
+      validateAuthority: configuration.validateAuthority,
+      postLogoutRedirectUri: configuration.postLogoutRedirectUri
     },
     cache: {
       cacheLocation: "sessionStorage",
@@ -32,9 +44,11 @@ export function getUserAgentApplication(configuration: MsalConfig) {
   });
 }
 
-export async function getUserTokenOrRedirect(configuration: MsalConfig) {
+
+
+export async function getUserTokenOrRedirect() {
   
-  const userAgentApplication = getUserAgentApplication(configuration);
+  const userAgentApplication = getUserAgentApplication();
 
   userAgentApplication.handleRedirectCallback((authError, authResponse) => {
     console.debug("getUserTokenOrRedirect::params", authError, authResponse);
