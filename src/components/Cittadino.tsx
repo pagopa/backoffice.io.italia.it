@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import { MetodiPagamento } from "./MetodiPagamento";
-import { createClient, WithDefaultsT } from "../generated/definitions/client";
-
 
 
 
 export class Cittadino extends Component {
 
-    public componentDidMount = async () => {
-        const simpleClient: Client = createClient({
-            baseUrl: `http://localhost:80`
-        });
-        const result = await simpleClient.GetBPDCitizen({
-            "x-citizen-fiscal-code": "AAABBB01C02D345C"
-        });
-        
-    }
     public render() {
         return (
             <>
