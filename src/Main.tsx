@@ -3,6 +3,7 @@ import { App } from "./App";
 import { FirstSearch } from "./pages/FirstSearch";
 import { Sheet } from "./pages/Sheet";
 import { Login } from "./pages/Login";
+import { Logout } from "./pages/Logout";
 import { DashboardHeader } from "./components/DashboardHeader";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'typeface-titillium-web';
@@ -55,7 +56,6 @@ const PrivateRoute = ({
       pathname: "/login",
     }}
     />
-    
 );
 
 
@@ -72,11 +72,11 @@ export class Main extends React.Component<IMainProps, {}>
             <HashRouter>
               <Switch>
                 <Route exact={true} path="/login" component={Login} />
+                <Route exact={true} path="/logout" component={Logout} />
                 <PrivateRoute exact={true} path="/" component={FirstSearch} />
                 <PrivateRoute exact={true} path="/sheet" component={Sheet} />
                 <Route component={Login} />
               </Switch>
-            
             </HashRouter>
         );
     }

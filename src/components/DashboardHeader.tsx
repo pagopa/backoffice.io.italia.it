@@ -1,11 +1,19 @@
 import React, { Component }  from "react";
 import {Link} from "react-router-dom";
-import { UncontrolledDropdown, DropdownToggle, 
-    DropdownMenu, Button } 
+import { UncontrolledDropdown, DropdownToggle,
+    DropdownMenu, Button }
     from 'reactstrap';
+import { getUserAgentApplication } from "../helpers/msal";
 
 
 export class DashboardHeader extends Component {
+    public onSignOut = async () => {
+        const userAgentApplication = getUserAgentApplication();
+        sessionStorage.clear();
+        userAgentApplication.logout();
+        
+      };
+
     public render() {
         return (
                 <>
@@ -52,6 +60,7 @@ export class DashboardHeader extends Component {
                                 color="primary"
                                 size="sm"
                                 tag="button"
+                                onClick={this.onSignOut}
                                 >
                                 Log-out
                                 </Button>
