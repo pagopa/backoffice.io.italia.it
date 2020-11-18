@@ -1,20 +1,17 @@
 {
-  "name": "pagopa-dashboard-frontend",
+  "name": "backoffice.io.italia.it",
+  "author": "IO Team",
+  "repository": "https://github.com/pagopa/backoffice.io.italia.it",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
-    "@types/react": "^16.9.55",
-    "@types/react-dom": "^16.9.9",
-    "cssnano": "^4.1.10",
-    "italia-utils": "^6.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "typescript": "^4.0.5"
-  },
   "scripts": {
     "dev": "parcel src/index.html --out-dir build/debug",
-    "build": "parcel build src/index.html --out-dir build/release --public-url ./"
+    "build": "parcel build src/index.html --out-dir build/release --public-url ./",
+    "test": "jest -coverage",
+    "lint": "tslint -p .",
+    "generate:definitions": "shx rm -rf ./generated/definitions && gen-api-models --client --request-types --response-decoders --api-spec ./src/generated/yaml/index.yaml --out-dir ./generated/definitions",
+    "generate": "npm-run-all generate:*"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
@@ -24,5 +21,21 @@
     "typeface-lora": "^1.1.13",
     "typeface-roboto-mono": "^1.1.13",
     "typeface-titillium-web": "^1.1.13"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "cssnano": "^4.1.10",
+    "danger-plugin-digitalcitizenship": "^1.0.0",
+    "dotenv": "^8.2.0",
+    "italia-tslint-rules": "^1.1.3",
+    "italia-utils": "^6.2.1",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^1.12.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "shx": "^0.3.3",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.5"
   }
 }
