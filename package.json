@@ -10,7 +10,7 @@
     "build": "parcel build src/index.html --out-dir build/release --public-url ./",
     "test": "jest -coverage",
     "lint": "tslint -p .",
-    "generate:definitions": "shx rm -rf ./generated/definitions && gen-api-models --client --request-types --response-decoders --api-spec ./src/generated/yaml/index.yaml --out-dir ./generated/definitions",
+    "generate:definitions": "shx rm -rf ./generated/definitions && gen-api-models --client --request-types --response-decoders --api-spec https://raw.githubusercontent.com/pagopa/io-functions-backoffice/master/openapi/index.yaml --out-dir ./generated/definitions",
     "generate": "npm-run-all generate:*"
   },
   "dependencies": {
