@@ -1,0 +1,33 @@
+# This pipeline can be manually run or is automatically triggered whenever one 
+# of the following conditions is true:
+# - a push is made to any branch in the repository (not only 'master')
+# - a pull request is created
+# - a tag named 'latest' is pushed
+# Note. In the last case, the tag can be (re-)created using the Git CLI, e.g.:
+#    git push -f origin <abfb967>:refs/tags/latest
+trigger:
+  branches:
+    include:
+      - '*'
+      - refs/tags/latest
+
+# This pipeline has been implemented to be run on hosted agent pools based both
+# on 'windows' and 'ubuntu' virtual machine images and using the scripts defined
+# in the package.json file. Since we are deploying on Azure functions on Windows
+# runtime, the pipeline is currently configured to use a Windows hosted image for
+# the build and deploy.
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+
+  # A) pack healthcheck
+  - stage: nop
+    dependsOn: []
+    jobs:
+      # A1) 
+      - job: nop      
+        steps:
+        - template: azure-templates/nop.yml
+          parameters:
+            azureSubscription: '$(PRODUCTION_AZURE_SUBSCRIPTION)'

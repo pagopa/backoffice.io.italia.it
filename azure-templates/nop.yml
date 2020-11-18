@@ -1,0 +1,16 @@
+# Azure DevOps template with no action 
+parameters:
+  - name: 'azureSubscription'
+    type: string
+    default: ''
+    
+steps:
+  - task: AzureCLI@2
+    displayName: NextTask
+    inputs:
+      azureSubscription: '${{ parameters.azureSubscription }}'
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      failOnStandardError: false
+      inlineScript: |
+        echo "test"
