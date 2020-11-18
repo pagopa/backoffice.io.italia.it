@@ -1,4 +1,4 @@
-import React, { Component }  from "react";
+import React, { Component , useState }  from "react";
 import {Link} from "react-router-dom";
 import { UncontrolledDropdown, DropdownToggle,
     DropdownMenu, Button }
@@ -7,12 +7,24 @@ import { getUserAgentApplication } from "../helpers/msal";
 
 
 export class DashboardHeader extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedUser: ""
+        };
+      }
+
     public onSignOut = async () => {
         const userAgentApplication = getUserAgentApplication();
         sessionStorage.clear();
         userAgentApplication.logout();
-        
       };
+
+    public componentDidMount = async () => {
+        const idToken = await getUserAgentApplication().getAccount().idToken;
+        this.setState({ loggedUser: `${idToken.given_name} ${idToken.family_name} / ${idToken.emails[0]}` });
+    }
 
     public render() {
         return (
@@ -24,37 +36,9 @@ export class DashboardHeader extends Component {
                         </Link>
 
                         <div className=" d-flex align-items-center">
-                            <UncontrolledDropdown
-                                nav
-                                tag="div"
-                            >
-                                <DropdownToggle
-                                aria-haspopup
-                                caret
-                                className="text-white"
-                                nav
-                                >
-                                Check IBAN
-
-                                </DropdownToggle>
-                                <DropdownMenu
-                                flip
-                                tag="div"
-                                right
-                                className="p-2"
-                                >
-                                    <div>
-                                    <input type="text" placeholder="IBAN"
-                                            className="mb-2" />
-                                    <Button
-                                    color="primary"
-                                    tag="button"
-                                    >
-                                    Verifica
-                                    </Button>
-                                    </div>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
+                            <div className="text-white small mr-3">
+                            {this.state.loggedUser}
+                            </div>
                             <div className="it-access-top-wrapper">
                                 <Button
                                 color="primary"
@@ -69,7 +53,6 @@ export class DashboardHeader extends Component {
                     </nav>
 
                 </>
-                
         );
     }
 }
