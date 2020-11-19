@@ -66,7 +66,9 @@ export async function getUserTokenOrRedirect() {
 
   if (!account) {
     console.debug("getUserTokenOrRedirect::loginRedirect");
-    return userAgentApplication.loginRedirect({redirectUri: configuration.b2cScopes[0]});
+    return userAgentApplication.loginRedirect({
+      scopes: [...configuration.b2cScopes]
+    });
   }
 
   try {
