@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import "./MetodiPagamento.css";
-const creditcardIcon = "/assets/creditcard.svg";
+import creditcardIcon from "/assets/creditcard.svg";
 
 type Props = unknown;
 type MetodiPagamentoState = {
