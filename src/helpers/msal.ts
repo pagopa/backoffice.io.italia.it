@@ -30,17 +30,18 @@ const configuration: IMsalConfig = {
   clientID: "c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06",
   redirectUri: window.location.origin,
   validateAuthority: false,
+
   postLogoutRedirectUri: window.location.origin + "/#/logout"
 };
 
 export function getUserAgentApplication() {
   return new UserAgentApplication({
     auth: {
-      clientId: configuration.clientID,
       authority: configuration.authority,
+      clientId: configuration.clientID,
+      postLogoutRedirectUri: configuration.postLogoutRedirectUri,
       redirectUri: configuration.redirectUri,
-      validateAuthority: configuration.validateAuthority,
-      postLogoutRedirectUri: configuration.postLogoutRedirectUri
+      validateAuthority: configuration.validateAuthority
     },
     cache: {
       cacheLocation: "sessionStorage",
@@ -65,7 +66,7 @@ export async function getUserTokenOrRedirect() {
 
   if (!account) {
     console.debug("getUserTokenOrRedirect::loginRedirect");
-    return userAgentApplication.loginRedirect(configuration.b2cScopes);
+    return userAgentApplication.loginRedirect({redirectUri: configuration.b2cScopes[0]});
   }
 
   try {

@@ -1,21 +1,26 @@
 import React, { Component } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import "./MetodiPagamento.css";
-import creditcardIcon from "/assets/creditcard.svg";
+const creditcardIcon = "/assets/creditcard.svg";
 
-export class MetodiPagamento extends Component {
-  constructor(props) {
+type Props = unknown;
+type MetodiPagamentoState = {
+  activeTab: number;
+};
+
+export class MetodiPagamento extends Component<Props, MetodiPagamentoState> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       activeTab: 0
     };
   }
 
-  toggle(tab) {
+  toggle(tab: number): void {
     if (this.state.activeTab !== tab) this.setState({ activeTab: tab });
   }
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <>
         <div className="mt-4 mb-2 font-weight-bold">
@@ -25,11 +30,11 @@ export class MetodiPagamento extends Component {
           <NavItem>
             <NavLink
               className={`d-flex align-items-center position-relative ${
-                this.state.activeTab === "1" ? "active" : ""
+                this.state.activeTab === 1 ? "active" : ""
               }`}
               title="Visualizza dettaglio"
               onClick={() => {
-                this.toggle("1");
+                this.toggle(1);
               }}
             >
               <div className="MetodiPagamento__stato attivo"></div>
@@ -43,10 +48,10 @@ export class MetodiPagamento extends Component {
           <NavItem>
             <NavLink
               className={`d-flex align-items-center position-relative ${
-                this.state.activeTab == "2" ? "active" : ""
+                this.state.activeTab === 2 ? "active" : ""
               }`}
               onClick={() => {
-                this.toggle("2");
+                this.toggle(2);
               }}
               title="Visualizza dettaglio"
             >

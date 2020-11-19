@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./FirstSearch.css";
 
 export class FirstSearch extends Component {
-  public render() {
+  public render(): JSX.Element {
     return (
       <>
         <div className="FirstSearch__form p-5 shadow rounded mx-auto">
