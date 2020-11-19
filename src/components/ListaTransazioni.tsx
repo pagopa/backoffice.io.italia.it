@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./ListaTransazioni.css";
-const viewIcon = "/assets/view.svg";
+import viewIcon from "/assets/view.svg";
 
 type Props = unknown;
 type ListaTransazioniState = {};

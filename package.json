@@ -6,7 +6,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel src/index.html --out-dir build/debug",
+    "dev": "parcel --port 3000 src/index.html --out-dir build/debug",
     "prebuild": "tsc --noEmit",
     "build": "parcel build src/index.html --out-dir build/release --public-url ./",
     "test": "jest -coverage",
