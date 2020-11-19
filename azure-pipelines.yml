@@ -146,17 +146,17 @@ stages:
             )
           )
         )
-    dependsOn:
-      - Build
-    jobs:
-      - job: deploy_to_container
-        steps:
-          - template: azure-templates/deploy-steps.yml
-            parameters:
-              deployType: 'deployToAzureBlob'
-              azureSubscription: '$(TEST_AZURE_SUBSCRIPTION)'
-              storageAccountName: '$(TEST_STORAGE_ACCOUNT_NAME)'
-              containerName: '$(BLOB_CONTAINER_NAME)'
+      dependsOn:
+        - Build
+      jobs:
+        - job: deploy_to_container
+          steps:
+            - template: azure-templates/deploy-steps.yml
+              parameters:
+                deployType: 'deployToAzureBlob'
+                azureSubscription: '$(TEST_AZURE_SUBSCRIPTION)'
+                storageAccountName: '$(TEST_STORAGE_ACCOUNT_NAME)'
+                containerName: '$(BLOB_CONTAINER_NAME)'
 
 
   # D) Deploy to PRODUCTION environment if one of the following conditions apply:
@@ -178,14 +178,14 @@ stages:
             )
           )
         )
-    dependsOn:
-      - Build
-    jobs:
-      - job: deploy_to_container
-        steps:
-          - template: azure-templates/deploy-steps.yml
-            parameters:
-              deployType: 'deployToAzureBlob'
-              azureSubscription: '$(PRODUCTION_AZURE_SUBSCRIPTION)'
-              storageAccountName: '$(PRODUCTION_STORAGE_ACCOUNT_NAME)'
-              containerName: '$(BLOB_CONTAINER_NAME)'
+      dependsOn:
+        - Build
+      jobs:
+        - job: deploy_to_container
+          steps:
+            - template: azure-templates/deploy-steps.yml
+              parameters:
+                deployType: 'deployToAzureBlob'
+                azureSubscription: '$(PRODUCTION_AZURE_SUBSCRIPTION)'
+                storageAccountName: '$(PRODUCTION_STORAGE_ACCOUNT_NAME)'
+                containerName: '$(BLOB_CONTAINER_NAME)'
