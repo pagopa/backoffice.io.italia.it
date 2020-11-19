@@ -7,11 +7,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel src/index.html --out-dir build/debug",
+    "prebuild": "tsc --noEmit",
     "build": "parcel build src/index.html --out-dir build/release --public-url ./",
     "test": "jest -coverage",
     "lint": "tslint -p .",
     "generate:definitions": "shx rm -rf ./generated/definitions && gen-api-models --client --request-types --response-decoders --api-spec ./src/generated/yaml/index.yaml --out-dir ./generated/definitions",
-    "generate": "npm-run-all generate:*"
+    "generate": "npm-run-all generate:*",
+    "prettify": "prettier --write \"./**/*.{ts,tsx}\""
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
@@ -23,8 +25,9 @@
     "typeface-titillium-web": "^1.1.13"
   },
   "devDependencies": {
-    "@types/react": "^16.9.55",
+    "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
+    "@types/react-router-dom": "^5.1.6",
     "cssnano": "^4.1.10",
     "danger-plugin-digitalcitizenship": "^1.0.0",
     "dotenv": "^8.2.0",
