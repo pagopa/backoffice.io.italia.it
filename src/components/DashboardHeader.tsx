@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { getUserAgentApplication } from "../helpers/msal";
 
-export class DashboardHeader extends Component {
-  constructor(props) {
+type Props = unknown;
+type DashboardHeaderState = {
+  loggedUser: string;
+};
+
+export class DashboardHeader extends Component<Props, DashboardHeaderState> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       loggedUser: ""
@@ -24,7 +29,7 @@ export class DashboardHeader extends Component {
     });
   };
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <>
         <nav className="navbar navbar-dark bg-dark justify-content-between">
