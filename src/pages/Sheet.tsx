@@ -1,17 +1,21 @@
-import React, { Component } from "react";
-import { Cittadino } from "../components/Cittadino";
+import React, {useEffect} from "react";
+import Citizen from "../components/Citizen";
 import { ListaTransazioni } from "../components/ListaTransazioni";
 
-export class Sheet extends Component {
-  public render() {
-    return (
-      <>
-        <Cittadino />
 
-        <hr />
 
-        <ListaTransazioni />
-      </>
-    );
-  }
+
+function Sheet(props) {
+
+  return (
+    <>
+      <Citizen {...props} />
+
+      <hr />
+
+      <ListaTransazioni />
+    </>
+  );
 }
+
+export default Sheet;

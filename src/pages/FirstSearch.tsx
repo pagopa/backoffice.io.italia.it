@@ -1,26 +1,33 @@
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import "./FirstSearch.css";
 
-export class FirstSearch extends Component {
-  public render() {
+function FirstSearch(props) {
+    const [citizenid, setCitizenid] = useState("");
+
     return (
       <>
         <div className="FirstSearch__form p-5 shadow rounded mx-auto">
-          <h2>Cerca per support token</h2>
+          <h2>Cerca cittadino</h2>
           <div className="form-group">
             <div className="input-group mt-5">
               <input
                 type="text"
                 className="form-control"
-                id="input-group-3"
-                name="input-group-3"
-                placeholder="Codice fiscale"
+                id="searchtoken"
+                name="searchtoken"
+                placeholder=""
+                onChange={e=>setCitizenid(e.target.value)}
               />
               <div className="input-group-append">
                 <Link
-                  to="/sheet"
+                  id="submitCitizenid"
+                  to={{pathname: "/sheet",
+                    state: {
+                      citizenid: citizenid
+                    }
+                    }}
                   className="btn btn-primary d-flex align-items-center"
                 >
                   Invio
@@ -31,5 +38,6 @@ export class FirstSearch extends Component {
         </div>
       </>
     );
-  }
 }
+
+export default FirstSearch;

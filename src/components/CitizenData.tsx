@@ -1,35 +1,39 @@
-import React, { Component } from "react";
-import { MetodiPagamento } from "./MetodiPagamento";
+import React from "react";
+import Paymethods from "./Paymethods";
+import { BPDCitizen } from "../generated/definitions/BPDCitizen";
+import Moment from 'react-moment';
 
-export class Cittadino extends Component {
-  public render() {
+interface CitizenDataProps {
+  resultData: BPDCitizen
+}
+
+function CitizenData(props: CitizenDataProps) {
     return (
-      <>
+    <>
         <div className="d-flex align-items-center">
           <h1>Profilo Cittadino</h1>
           <span className="text-secondary small ml-auto">
-            Support token ricercato: AO201122233
+            Hai cercato: {window.sessionStorage.getItem('citizenid')}
           </span>
         </div>
         <div className="row">
           <div className="col-md-8">
             <div className="row mt-2">
               <div className="col-md-3 font-weight-bold">Codice fiscale</div>
-              <div className="col-md-9">MRRSST01A78V123H</div>
+            <div className="col-md-9">{props.resultData.fiscal_code}</div>
             </div>
             <div className="row mt-2">
-              <div className="col-md-3 font-weight-bold">Data on-boarding</div>
-              <div className="col-md-9">01/10/2020</div>
+              <div className="col-md-3 font-weight-bold">Data On-boarding</div>
+              <div className="col-md-9"><Moment  date={props.resultData.timestamp_tc} /></div>
             </div>
+            {props.resultData.payoff_instr &&
             <div className="row mt-2">
-              <div className="col-md-3 font-weight-bold">Issuer</div>
-              <div className="col-md-9">pagoPA</div>
+              <div className="col-md-3 font-weight-bold">Payoff</div>
+              <div className="col-md-9">{props.resultData.payoff_instr_type} {props.resultData.payoff_instr} </div>
             </div>
-            <div className="row mt-2">
-              <div className="col-md-3 font-weight-bold">IBAN</div>
-              <div className="col-md-9">IT60X0542811101000000123456</div>
-            </div>
-            <MetodiPagamento />
+            }
+
+        {props.resultData.payment_methods.length > 0 && <Paymethods paylist={props.resultData.payment_methods} /> }
           </div>
           <div className="col-md-4">
             <div className="bg-light p-3 p-md-5 mt-3 mt-md-0">
@@ -50,6 +54,7 @@ export class Cittadino extends Component {
           </div>
         </div>
       </>
-    );
-  }
+      )
 }
+
+export default CitizenData;
