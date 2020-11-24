@@ -1,5 +1,4 @@
-import React, { ReactNode } from "react";
-import { App } from "./App";
+import React from "react";
 import FirstSearch from "./pages/FirstSearch";
 import Sheet from "./pages/Sheet";
 import { Login } from "./pages/Login";
@@ -17,11 +16,7 @@ import {
   RouteProps
 } from "react-router-dom";
 
-export interface IMainProps {
-  app: App;
-}
-
-const Layout = ({ children }: { children: ReactNode }) => (
+const Layout: React.FunctionComponent = ({ children }) => (
   <>
     <DashboardHeader></DashboardHeader>
     <section className="container">
@@ -35,7 +30,10 @@ type PrivateRouteParams = {
   component: any;
 } & RouteProps;
 
-const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteParams) =>
+const PrivateRoute: React.FunctionComponent<PrivateRouteParams> = ({
+  component: Component,
+  ...rest
+}: PrivateRouteParams) =>
   !!sessionStorage.getItem("userToken") ? (
     <Route
       {...rest}
@@ -53,22 +51,14 @@ const PrivateRoute = ({ component: Component, ...rest }: PrivateRouteParams) =>
     />
   );
 
-export class Main extends React.Component<IMainProps, {}> {
-  constructor(props: IMainProps) {
-    super(props);
-  }
-
-  public render(): JSX.Element {
-    return (
-      <HashRouter>
-        <Switch>
-          <Route exact={true} path="/login" component={Login} />
-          <Route exact={true} path="/logout" component={Logout} />
-          <PrivateRoute exact={true} path="/" component={FirstSearch} />
-          <PrivateRoute exact={true} path="/sheet" component={Sheet} />
-          <Route component={Login} />
-        </Switch>
-      </HashRouter>
-    );
-  }
-}
+export const Main: React.FunctionComponent<{}> = () => (
+  <HashRouter>
+    <Switch>
+      <Route exact={true} path="/login" component={Login} />
+      <Route exact={true} path="/logout" component={Logout} />
+      <PrivateRoute exact={true} path="/" component={FirstSearch} />
+      <PrivateRoute exact={true} path="/sheet" component={Sheet} />
+      <Route component={Login} />
+    </Switch>
+  </HashRouter>
+);
