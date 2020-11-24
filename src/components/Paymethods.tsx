@@ -2,7 +2,7 @@ import { number } from "io-ts";
 import { Integer } from "italia-ts-commons/lib/numbers";
 import React, { useState } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
-import PaymentMethod from "./PaymentMethod";
+import { PaymentMethod } from "./PaymentMethod";
 import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 import "./Paymethods.css";
@@ -10,10 +10,10 @@ import { PaymentMethod as PaymentMethodDef } from "../generated/definitions/Paym
 import classNames from "classnames";
 
 type PaymethodsProps = {
-  paylist: ReadonlyArray<PaymentMethod>;
+  paylist: ReadonlyArray<PaymentMethodDef>;
 };
 
-function Paymethods(props: PaymethodsProps) {
+export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const { t, i18n } = useTranslation();
@@ -56,6 +56,4 @@ function Paymethods(props: PaymethodsProps) {
       </TabContent>
     </>
   );
-}
-
-export default Paymethods;
+};

@@ -18,7 +18,9 @@ const resources = {
       "Error 401": "Authentication problem",
       "Error 404": "No match found with",
       "Error 500": "Generic error",
-      "Detail" : "See detail"
+      "Detail" : "See detail",
+      "Transactions list": "Transactions list",
+      "Transaction details": "Transaction details"
 
     }
   },
@@ -38,7 +40,10 @@ const resources = {
         "Error 401": "Token di autenticazione non valido",
         "Error 404": "Nessuna corrispondenza trovata con il codice",
         "Error 500": "Errore generico",
-        "Detail" : "Visualizza dettaglio"
+        "Detail" : "Visualizza dettaglio",
+        "Transactions list" : "Lista transazioni",
+        "Transaction details": "Dettaglio transazione"
+
     }
   }
 };

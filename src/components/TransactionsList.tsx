@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./TransactionsList.css";
 import viewIcon from "/assets/view.svg";
+import { useTranslation } from "react-i18next";
 
 type Props = unknown;
 type TransactionsListState = {};
@@ -10,10 +11,11 @@ function TransactionsList(props) {
     const idDetail = `detail${index}`;
     document.getElementById(idDetail)?.classList.toggle("d-none");
   }
+  const { t, i18n } = useTranslation();
 
   return (
     <>
-      <h3>Lista transazioni</h3>
+      <h3>{t("Transactions list")}</h3>
 
       <div className="mt-3">
         <div className="row border-bottom border-dark py-2">
@@ -51,7 +53,7 @@ function TransactionsList(props) {
               className="col-12 d-none TransactionsList__detail"
               id={`detail${index}`}
             >
-              Dettaglio con altri dati
+              {t("Transaction details")}
             </div>
           </div>
         ))}

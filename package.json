@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.11",
+    "@types/history": "^4.7.8",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
