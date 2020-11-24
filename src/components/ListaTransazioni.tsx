@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import "./ListaTransazioni.css";
 import viewIcon from "/assets/view.svg";
 
-export class ListaTransazioni extends Component {
-  openDetail(index) {
-    let idDetail = `detail${index}`;
+type Props = unknown;
+type ListaTransazioniState = {};
+
+export class ListaTransazioni extends Component<Props, ListaTransazioniState> {
+  openDetail(index: number): void {
+    const idDetail = `detail${index}`;
     document.getElementById(idDetail)?.classList.toggle("d-none");
   }
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <>
         <h3>Lista transazioni</h3>
@@ -26,7 +29,7 @@ export class ListaTransazioni extends Component {
             <div
               key={index}
               className={`ListaTransazioni__row row py-2 ${
-                index % 2 == 1 ? "bg-light" : ""
+                index % 2 === 1 ? "bg-light" : ""
               }`}
             >
               <div className="col-sm-2">01/12/20 12:23</div>
