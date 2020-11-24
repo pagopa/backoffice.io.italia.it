@@ -8,6 +8,6 @@
     position: relative;
     font-weight: 600;
 }
-.TransactionsList__row:hover .TransactionsList__dettaglio {
+.TransactionsList__row:hover .TransactionsList__detail {
     font-weight: 300 !important;
 }

@@ -17,7 +17,8 @@ const resources = {
       "Error 400": "Invalid string",
       "Error 401": "Authentication problem",
       "Error 404": "No match found with",
-      "Error 500": "Generic error"
+      "Error 500": "Generic error",
+      "Detail" : "See detail"
 
     }
   },
@@ -36,7 +37,8 @@ const resources = {
         "Error 400": "Stringa di ricerca non valida",
         "Error 401": "Token di autenticazione non valido",
         "Error 404": "Nessuna corrispondenza trovata con il codice",
-        "Error 500": "Errore generico"
+        "Error 500": "Errore generico",
+        "Detail" : "Visualizza dettaglio"
     }
   }
 };

@@ -1,15 +1,15 @@
 import React from "react";
 import { TabPane } from "reactstrap";
-import { PaymentMethod } from "../generated/definitions/PaymentMethod";
+import { PaymentMethod as PaymentMethodDef } from "../generated/definitions/PaymentMethod";
 import { useTranslation } from "react-i18next";
 import { format, parseISO } from "date-fns";
 
-type PaymentMethodTabPaneProps = {
+type PaymentMethodProps = {
   index: number;
-  el: PaymentMethod;
+  el: PaymentMethodDef;
 };
 
-function PaymentMethodTabPane(element: PaymentMethodTabPaneProps): JSX.Element {
+function PaymentMethod(element: PaymentMethodProps): JSX.Element {
   const { t, i18n } = useTranslation();
   return (
     <TabPane tabId={element.index}>
@@ -45,4 +45,4 @@ function PaymentMethodTabPane(element: PaymentMethodTabPaneProps): JSX.Element {
   );
 }
 
-export default PaymentMethodTabPane;
+export default PaymentMethod;

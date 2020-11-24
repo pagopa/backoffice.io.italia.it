@@ -1,12 +1,8 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Citizen from "../components/Citizen";
-import { TransactionsList } from "../components/TransactionsList";
-
-
-
+import TransactionsList from "../components/TransactionsList";
 
 function Sheet(props) {
-
   return (
     <>
       <Citizen {...props} />
