@@ -3,7 +3,7 @@ import { TabContent, Nav, NavItem, NavLink } from "reactstrap";
 import { PaymentMethod } from "./PaymentMethod";
 import { useTranslation } from "react-i18next";
 import "./Paymethods.css";
-import { PaymentMethod as PaymentMethodDef } from "../generated/definitions/PaymentMethod";
+import { PaymentMethod as PaymentMethodDef } from "../../generated/definitions/PaymentMethod";
 import classNames from "classnames";
 
 type PaymethodsProps = {

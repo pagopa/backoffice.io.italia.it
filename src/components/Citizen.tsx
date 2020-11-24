@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CitizenData } from "./CitizenData";
-import { GetBPDCitizenT } from "../generated/definitions/requestTypes";
-import { BPDCitizen } from "../generated/definitions/BPDCitizen";
+import { GetBPDCitizenT } from "../../generated/definitions/requestTypes";
+import { BPDCitizen } from "../../generated/definitions/BPDCitizen";
 import { fromEither, fromLeft, tryCatch } from "fp-ts/lib/TaskEither";
 import { readableReport } from "italia-ts-commons/lib/reporters";
 import { TypeofApiResponse } from "italia-ts-commons/lib/requests";

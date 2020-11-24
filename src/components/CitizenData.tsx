@@ -1,6 +1,6 @@
 import React from "react";
 import { Paymethods } from "./Paymethods";
-import { BPDCitizen } from "../generated/definitions/BPDCitizen";
+import { BPDCitizen } from "../../generated/definitions/BPDCitizen";
 import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 
