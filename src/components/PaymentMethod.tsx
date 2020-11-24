@@ -5,8 +5,9 @@ import { useTranslation } from "react-i18next";
 import { format, parseISO } from "date-fns";
 
 type PaymentMethodProps = {
-  index: number;
   el: PaymentMethodDef;
+  index: number;
+  key?: number;
 };
 
 function PaymentMethod(element: PaymentMethodProps): JSX.Element {

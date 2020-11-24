@@ -9,7 +9,11 @@ import "./Paymethods.css";
 import { PaymentMethod as PaymentMethodDef } from "../generated/definitions/PaymentMethod";
 import classNames from "classnames";
 
-function Paymethods(props) {
+type PaymethodsProps = {
+  paylist: ReadonlyArray<PaymentMethod>;
+};
+
+function Paymethods(props: PaymethodsProps) {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const { t, i18n } = useTranslation();
@@ -47,7 +51,7 @@ function Paymethods(props) {
       </Nav>
       <TabContent activeTab={activeTab}>
         {props.paylist.map((el: PaymentMethodDef, index: number) => (
-          <PaymentMethod index={index} el={el} key={index} />
+          <PaymentMethod el={el} index={index} key={index} />
         ))}
       </TabContent>
     </>
