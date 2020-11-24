@@ -1,15 +1,17 @@
 import React, { useState, useRef } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import "./FirstSearch.css";
 
 function FirstSearch(props) {
     const [citizenid, setCitizenid] = useState("");
+    const { t, i18n } = useTranslation();
 
     return (
       <>
         <div className="FirstSearch__form p-5 shadow rounded mx-auto">
-          <h2>Cerca cittadino</h2>
+          <h2>{t('Find citizen')}</h2>
           <div className="form-group">
             <div className="input-group mt-5">
               <input
@@ -30,7 +32,7 @@ function FirstSearch(props) {
                     }}
                   className="btn btn-primary d-flex align-items-center"
                 >
-                  Invio
+                  {t('Submit')}
                 </Link>
               </div>
             </div>

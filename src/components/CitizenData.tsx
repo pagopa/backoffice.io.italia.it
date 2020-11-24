@@ -1,30 +1,32 @@
 import React from "react";
 import Paymethods from "./Paymethods";
 import { BPDCitizen } from "../generated/definitions/BPDCitizen";
-import Moment from 'react-moment';
+import { format, parseISO } from "date-fns";
+import { useTranslation } from 'react-i18next';
 
 interface CitizenDataProps {
   resultData: BPDCitizen
 }
 
 function CitizenData(props: CitizenDataProps) {
+    const { t, i18n } = useTranslation();
     return (
     <>
         <div className="d-flex align-items-center">
-          <h1>Profilo Cittadino</h1>
+          <h1>{t('Citizen profile')}</h1>
           <span className="text-secondary small ml-auto">
-            Hai cercato: {window.sessionStorage.getItem('citizenid')}
+          {t('Searched string')}: {window.sessionStorage.getItem('citizenid')}
           </span>
         </div>
         <div className="row">
           <div className="col-md-8">
             <div className="row mt-2">
-              <div className="col-md-3 font-weight-bold">Codice fiscale</div>
+              <div className="col-md-3 font-weight-bold">{t('Fiscal code')}</div>
             <div className="col-md-9">{props.resultData.fiscal_code}</div>
             </div>
             <div className="row mt-2">
-              <div className="col-md-3 font-weight-bold">Data On-boarding</div>
-              <div className="col-md-9"><Moment  date={props.resultData.timestamp_tc} /></div>
+              <div className="col-md-3 font-weight-bold">{t('On-boarding date')}</div>
+              <div className="col-md-9">{format( parseISO(props.resultData.timestamp_tc), 'dd/MM/yyyy HH:mm')}</div>
             </div>
             {props.resultData.payoff_instr &&
             <div className="row mt-2">
