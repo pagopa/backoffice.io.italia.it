@@ -23,17 +23,15 @@ function PaymentMethod(element: PaymentMethodProps): JSX.Element {
           <div className="col-12 py-2"></div>
           <div className="col-sm-2 font-weight-bold">{t("Insert date")}</div>
           <div className="col-sm-4">
-            {format(
-              parseISO(element.el.payment_instrument_insert_date),
-              "dd/MM/yyyy HH:mm"
-            )}
+            {fromNullable(element.el.payment_instrument_insert_date)
+              .map(_ => format(parseISO(_), "dd/MM/yyyy HH:mm"))
+              .getOrElse("")}
           </div>
           <div className="col-sm-2 font-weight-bold">{t("Update date")}</div>
           <div className="col-sm-4">
-            {format(
-              parseISO(element.el.payment_instrument_update_date),
-              "dd/MM/yyyy HH:mm"
-            )}
+            {fromNullable(element.el.payment_instrument_update_date)
+              .map(_ => format(parseISO(_), "dd/MM/yyyy HH:mm"))
+              .getOrElse("")}
           </div>
           <div className="col-12 py-2"></div>
           <div className="col-sm-2 font-weight-bold">HPAN</div>
