@@ -56,7 +56,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
           "x-citizen-id": getCitizenId(),
           Bearer: `Bearer ${getUserToken()}`
         }),
-      () => toError
+      toError
     )
       .foldTaskEither(
         apiError =>
