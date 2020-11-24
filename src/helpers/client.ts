@@ -1,6 +1,6 @@
 import { createClient, WithDefaultsT } from "../generated/definitions/client";
 
-export const simpleClient = createClient({
+export const BackofficeClient = createClient({
   baseUrl: process.env.REACT_APP_API_URL,
   fetchApi: fetch
 });

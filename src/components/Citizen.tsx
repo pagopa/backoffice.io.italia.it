@@ -5,7 +5,7 @@ import { BPDCitizen } from "../generated/definitions/BPDCitizen"
 import { fromEither, fromLeft, tryCatch } from "fp-ts/lib/TaskEither";
 import { readableReport } from "italia-ts-commons/lib/reporters";
 import { TypeofApiResponse } from "italia-ts-commons/lib/requests";
-import {simpleClient} from "../helpers/client";
+import {BackofficeClient} from "../helpers/client";
 import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from 'react-i18next';
 
@@ -35,7 +35,7 @@ function Citizen(props) {
       }
 
       // TaskEither
-      tryCatch(() => simpleClient.GetBPDCitizen({
+      tryCatch(() => BackofficeClient.GetBPDCitizen({
         'x-citizen-id': getCitizenId(),
         Bearer: `Bearer ${getUserToken()}`
       }), () => toError)
