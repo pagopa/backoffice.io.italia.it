@@ -24,7 +24,7 @@ function Paymethods(props) {
         {t('Payment methods')}
         </div>
 
-        <Nav tabs className="MetodiPagamento__list">
+        <Nav tabs className="PaymentMethod__list">
         {props.paylist.map((el: PaymentMethod, index: number) => (
           <NavItem key={index}>
           <NavLink
@@ -35,7 +35,7 @@ function Paymethods(props) {
             title="Visualizza dettaglio"
             onClick={()=> {toggle(index)}}
           >
-            <div className={`MetodiPagamento__stato ${el.payment_instrument_status}`}></div>
+            <div className={`PaymentMethod__state ${el.payment_instrument_status}`}></div>
             <div>
               <div>*{el.payment_instrument_hpan.slice(-5)}</div>
             </div>
