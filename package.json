@@ -11,15 +11,22 @@
     "build": "parcel build src/index.html --out-dir build/release --public-url ./",
     "test": "jest -coverage",
     "lint": "tslint -p .",
-    "generate:definitions": "shx rm -rf ./generated/definitions && gen-api-models --client --request-types --response-decoders --api-spec ./src/generated/yaml/index.yaml --out-dir ./generated/definitions",
+    "generate:definitions": "shx rm -rf ./generated/definitions && gen-api-models --client --request-types --response-decoders --api-spec https://raw.githubusercontent.com/pagopa/io-functions-backoffice/master/openapi/index.yaml --out-dir ./generated/definitions",
     "generate": "npm-run-all generate:*",
     "prettify": "prettier --write \"./**/*.{ts,tsx}\""
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.16.1",
+    "fp-ts": "1.17.4",
+    "generated": "^0.0.3",
+    "i18next": "^19.8.4",
+    "io-ts": "1.8.5",
     "msal": "^1.4.4",
-    "react": "^17.0.1",
+    "react": "17.0.1",
     "react-dom": "^17.0.1",
+    "react-i18next": "^11.7.3",
     "react-router-dom": "^5.2.0",
     "reactstrap": "^8.7.1",
     "typeface-lora": "^1.1.13",
@@ -27,12 +34,16 @@
     "typeface-titillium-web": "^1.1.13"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/history": "^4.7.8",
+    "@types/node": "^14.14.9",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
     "@types/react-router-dom": "^5.1.6",
     "cssnano": "^4.1.10",
     "danger-plugin-digitalcitizenship": "^1.0.0",
     "dotenv": "^8.2.0",
+    "italia-ts-commons": "^8.5.0",
     "italia-tslint-rules": "^1.1.3",
     "italia-utils": "^6.2.2",
     "npm-run-all": "^4.1.5",
@@ -40,5 +51,9 @@
     "shx": "^0.3.3",
     "tslint": "^6.1.3",
     "typescript": "^4.0.5"
+  },
+  "resolutions": {
+    "fp-ts": "1.17.4",
+    "io-ts": "1.8.5"
   }
 }

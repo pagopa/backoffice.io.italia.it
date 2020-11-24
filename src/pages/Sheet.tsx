@@ -1,17 +1,22 @@
-import React, { Component } from "react";
-import { Cittadino } from "../components/Cittadino";
-import { ListaTransazioni } from "../components/ListaTransazioni";
+import React, { useEffect } from "react";
+import { Citizen } from "../components/Citizen";
+import TransactionsList from "../components/TransactionsList";
+import { Location } from "history";
 
-export class Sheet extends Component {
-  public render() {
-    return (
-      <>
-        <Cittadino />
+type Props = {
+  location: Location<{ citizenid: string }>;
+};
 
-        <hr />
+function Sheet(props: Props) {
+  return (
+    <>
+      <Citizen {...props} />
 
-        <ListaTransazioni />
-      </>
-    );
-  }
+      <hr />
+
+      <TransactionsList />
+    </>
+  );
 }
+
+export default Sheet;

@@ -1,21 +1,21 @@
-.MetodiPagamento__list {
+.PaymentMethod__list {
     border-bottom: none !important;
 }
-.MetodiPagamento__list li {
+.PaymentMethod__list li {
     cursor: pointer;
     margin-right: .5rem;
 }
-.MetodiPagamento__list  a { 
+.PaymentMethod__list  a { 
     border-radius: .5rem !important;
     border: 1px solid #ddd !important;
 
 }
-.MetodiPagamento__list  a.active {
+.PaymentMethod__list  a.active {
     border-bottom-color: transparent !important;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
-.MetodiPagamento__stato {
+.PaymentMethod__state {
     position: absolute;
     z-index: 1000;
     width: 0;
@@ -26,6 +26,6 @@
     top: 0;
     left: 0;
 }
-.MetodiPagamento__stato.attivo {
+.PaymentMethod__state.ACTIVE {
     border-color: #37a51b transparent transparent transparent;
 }

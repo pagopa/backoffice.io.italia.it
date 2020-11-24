@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { App } from "./App";
-import { FirstSearch } from "./pages/FirstSearch";
-import { Sheet } from "./pages/Sheet";
+import FirstSearch from "./pages/FirstSearch";
+import Sheet from "./pages/Sheet";
 import { Login } from "./pages/Login";
 import { Logout } from "./pages/Logout";
 import { DashboardHeader } from "./components/DashboardHeader";
