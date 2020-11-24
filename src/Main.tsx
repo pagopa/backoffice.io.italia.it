@@ -33,7 +33,7 @@ type PrivateRouteParams = {
 const PrivateRoute: React.FunctionComponent<PrivateRouteParams> = ({
   component: Component,
   ...rest
-}: PrivateRouteParams) =>
+}) =>
   !!sessionStorage.getItem("userToken") ? (
     <Route
       {...rest}
