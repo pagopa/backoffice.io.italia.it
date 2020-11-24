@@ -3,6 +3,7 @@ import { TabPane } from "reactstrap";
 import { PaymentMethod as PaymentMethodDef } from "../generated/definitions/PaymentMethod";
 import { useTranslation } from "react-i18next";
 import { format, parseISO } from "date-fns";
+import { fromNullable } from "fp-ts/lib/Option";
 
 type PaymentMethodProps = {
   el: PaymentMethodDef;
