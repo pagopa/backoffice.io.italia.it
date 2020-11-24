@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSXElementConstructor } from "react";
 import FirstSearch from "./pages/FirstSearch";
 import Sheet from "./pages/Sheet";
 import { Login } from "./pages/Login";
@@ -26,8 +26,8 @@ const Layout: React.FunctionComponent = ({ children }) => (
 );
 
 type PrivateRouteParams = {
-  // tslint:disable-next-line:no-any
-  component: any;
+  // tslint:disable-next-line: no-any
+  component: JSXElementConstructor<any>;
 } & RouteProps;
 
 const PrivateRoute: React.FunctionComponent<PrivateRouteParams> = ({

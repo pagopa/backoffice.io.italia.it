@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Citizen } from "../components/Citizen";
 import TransactionsList from "../components/TransactionsList";
 import { Location } from "history";
@@ -7,7 +7,7 @@ type Props = {
   location: Location<{ citizenid: string }>;
 };
 
-function Sheet(props: Props) {
+const Sheet = (props: Props) => {
   return (
     <>
       <Citizen {...props} />
@@ -17,6 +17,6 @@ function Sheet(props: Props) {
       <TransactionsList />
     </>
   );
-}
+};
 
 export default Sheet;

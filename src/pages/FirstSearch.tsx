@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import "./FirstSearch.css";
 
-function FirstSearch() {
+const FirstSearch: React.FunctionComponent<{}> = () => {
   const [citizenid, setCitizenid] = useState<string>("");
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -28,7 +28,7 @@ function FirstSearch() {
                 to={{
                   pathname: "/sheet",
                   state: {
-                    citizenid: citizenid
+                    citizenid
                   }
                 }}
                 className="btn btn-primary d-flex align-items-center"
@@ -41,6 +41,6 @@ function FirstSearch() {
       </div>
     </>
   );
-}
+};
 
 export default FirstSearch;
