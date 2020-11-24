@@ -30,7 +30,7 @@ function Paymethods(props) {
           <NavLink
             className={classNames({
               'd-flex align-items-center position-relative': true,
-              'active': activeTab==index
+              'active': activeTab===index
             })}
             title="Visualizza dettaglio"
             onClick={()=> {toggle(index)}}
