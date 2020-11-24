@@ -34,7 +34,7 @@ const configuration: IMsalConfig = {
   postLogoutRedirectUri: window.location.origin + "/#/logout"
 };
 
-export function getUserAgentApplication() {
+export const getUserAgentApplication = () => {
   return new UserAgentApplication({
     auth: {
       authority: configuration.authority,
@@ -48,16 +48,18 @@ export function getUserAgentApplication() {
       storeAuthStateInCookie: true
     }
   });
-}
+};
 
-export async function getUserTokenOrRedirect() {
+export const getUserTokenOrRedirect = async () => {
   const userAgentApplication = getUserAgentApplication();
 
   userAgentApplication.handleRedirectCallback((authError, authResponse) => {
+    // tslint:disable-next-line: no-console
     console.debug("getUserTokenOrRedirect::params", authError, authResponse);
   });
 
   const account = userAgentApplication.getAccount();
+  // tslint:disable-next-line: no-console
   console.debug("getUserTokenOrRedirect::account");
 
   if (userAgentApplication.isCallback(window.location.hash)) {
@@ -65,6 +67,7 @@ export async function getUserTokenOrRedirect() {
   }
 
   if (!account) {
+    // tslint:disable-next-line: no-console
     console.debug("getUserTokenOrRedirect::loginRedirect");
     return userAgentApplication.loginRedirect({
       scopes: [...configuration.b2cScopes]
@@ -75,16 +78,18 @@ export async function getUserTokenOrRedirect() {
     const authResponse = await userAgentApplication.acquireTokenSilent({
       scopes: [...configuration.b2cScopes]
     });
+    // tslint:disable-next-line: no-console
     console.debug("getUserTokenOrRedirect::authResponse");
 
     return {
-      token: authResponse.accessToken,
-      account: userAgentApplication.getAccount()
+      account: userAgentApplication.getAccount(),
+      token: authResponse.accessToken
     };
   } catch (e) {
+    // tslint:disable-next-line: no-console
     console.debug("getUserTokenOrRedirect::error", e);
     return userAgentApplication.acquireTokenRedirect({
       scopes: [...configuration.b2cScopes]
     });
   }
-}
+};

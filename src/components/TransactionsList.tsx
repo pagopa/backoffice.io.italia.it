@@ -3,7 +3,7 @@ import "./TransactionsList.css";
 import viewIcon from "/assets/view.svg";
 import { useTranslation } from "react-i18next";
 
-function TransactionsList() {
+const TransactionsList = () => {
   function openDetail(index: number): void {
     const idDetail = `detail${index}`;
     document.getElementById(idDetail)?.classList.toggle("d-none");
@@ -57,6 +57,6 @@ function TransactionsList() {
       </div>
     </>
   );
-}
+};
 
 export default TransactionsList;

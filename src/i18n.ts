@@ -1,3 +1,5 @@
+// tslint:disable no-duplicate-string object-literal-sort-keys
+
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -46,15 +48,19 @@ const resources = {
   }
 };
 
-i18n.use(initReactI18next).init({
-  resources,
-  lng: "it",
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: "it",
 
-  keySeparator: false,
+    keySeparator: false,
 
-  interpolation: {
-    escapeValue: false
-  }
-});
+    interpolation: {
+      escapeValue: false
+    }
+  })
+  // tslint:disable-next-line no-console
+  .catch(console.error);
 
 export default i18n;
