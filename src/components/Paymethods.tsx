@@ -6,8 +6,7 @@ import { format, parseISO } from "date-fns";
 import { useTranslation } from 'react-i18next';
 import "./Paymethods.css";
 import {PaymentMethod} from "../generated/definitions/PaymentMethod";
-
-var classNames = require('classnames');
+import classNames from "classnames";
 
 function Paymethods(props) {
 
