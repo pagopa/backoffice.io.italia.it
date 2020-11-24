@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Citizen from "../components/Citizen";
-import { ListaTransazioni } from "../components/ListaTransazioni";
+import { TransactionsList } from "../components/TransactionsList";
 
 
 
@@ -13,7 +13,7 @@ function Sheet(props) {
 
       <hr />
 
-      <ListaTransazioni />
+      <TransactionsList />
     </>
   );
 }

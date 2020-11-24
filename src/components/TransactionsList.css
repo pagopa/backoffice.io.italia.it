@@ -1,13 +1,13 @@
 .cursor-pointer {
     cursor: pointer;
 }
-.ListaTransazioni__row:hover {
+.TransactionsList__row:hover {
     background-color: aliceblue !important;
     box-shadow: outset 1px 1px 4px rgba(0,0,0,0.6);
     z-index: 100;
     position: relative;
     font-weight: 600;
 }
-.ListaTransazioni__row:hover .ListaTransazioni__dettaglio {
+.TransactionsList__row:hover .TransactionsList__dettaglio {
     font-weight: 300 !important;
 }

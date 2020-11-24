@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./ListaTransazioni.css";
+import "./TransactionsList.css";
 import viewIcon from "/assets/view.svg";
 
 type Props = unknown;
-type ListaTransazioniState = {};
+type TransactionsListState = {};
 
-export class ListaTransazioni extends Component<Props, ListaTransazioniState> {
+export class TransactionsList extends Component<Props, TransactionsListState> {
   openDetail(index: number): void {
     const idDetail = `detail${index}`;
     document.getElementById(idDetail)?.classList.toggle("d-none");
@@ -28,7 +28,7 @@ export class ListaTransazioni extends Component<Props, ListaTransazioniState> {
           {[...Array(30)].map((elementInArray, index) => (
             <div
               key={index}
-              className={`ListaTransazioni__row row py-2 ${
+              className={`TransactionsList__row row py-2 ${
                 index % 2 === 1 ? "bg-light" : ""
               }`}
             >
@@ -49,7 +49,7 @@ export class ListaTransazioni extends Component<Props, ListaTransazioniState> {
                 <span className="badge badge-primary">RAW</span>
               </div>
               <div
-                className="col-12 d-none ListaTransazioni__dettaglio"
+                className="col-12 d-none TransactionsList__dettaglio"
                 id={`detail${index}`}
               >
                 Dettaglio con altri dati
