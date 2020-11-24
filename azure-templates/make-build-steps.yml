@@ -37,5 +37,10 @@ steps:
     # Add variables to env-config.js using script env.sh and make the build
   - ${{ if eq(parameters.make, 'build') }}:
     - bash: |
+        yarn generate
+      displayName: 'Generate definitions'
+
+  - ${{ if eq(parameters.make, 'build') }}:
+    - bash: |
         yarn build
       displayName: 'Build files'
