@@ -14,19 +14,30 @@ function Citizen(props) {
     const [resultData, setResultdata] = useState<BPDCitizen | undefined>(undefined);
     const [resultErr, setResulterr] = useState<string>("");
 
+    function getCitizenId():string {
+      const CitizenId =  window.sessionStorage.getItem('citizenid')||"";
+      return CitizenId.toUpperCase();
+    }
+    function getUserToken():string {
+      return window.sessionStorage.getItem('userToken')||"";
+    }
+    function setCitizenId(citizenid:string) {
+      window.sessionStorage.setItem('citizenid',citizenid);
+    }
+
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
       if (props.location.state) {
         const citizenid = props.location.state.citizenid;
         // useful to have value also in case of page-refresh
-        window.sessionStorage.setItem('citizenid',props.location.state.citizenid);
+        setCitizenId(props.location.state.citizenid);
       }
 
       // TaskEither
       tryCatch(() => simpleClient.GetBPDCitizen({
-        'x-citizen-id': window.sessionStorage.getItem('citizenid') || "",
-        Bearer: `Bearer ${sessionStorage.getItem('userToken')}`
+        'x-citizen-id': getCitizenId(),
+        Bearer: `Bearer ${getUserToken()}`
       }), () => toError)
       .foldTaskEither(
         apiError => fromLeft<Error, TypeofApiResponse<GetBPDCitizenT>>(apiError),
