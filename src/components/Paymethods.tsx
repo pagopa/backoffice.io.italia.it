@@ -1,9 +1,6 @@
-import { number } from "io-ts";
-import { Integer } from "italia-ts-commons/lib/numbers";
 import React, { useState } from "react";
-import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
+import { TabContent, Nav, NavItem, NavLink } from "reactstrap";
 import { PaymentMethod } from "./PaymentMethod";
-import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 import "./Paymethods.css";
 import { PaymentMethod as PaymentMethodDef } from "../generated/definitions/PaymentMethod";
@@ -16,7 +13,7 @@ type PaymethodsProps = {
 export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const toggle = (tab: number) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -31,8 +28,8 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
           <NavItem key={index}>
             <NavLink
               className={classNames({
-                "d-flex align-items-center position-relative": true,
-                active: activeTab === index
+                active: activeTab === index,
+                "d-flex align-items-center position-relative": true
               })}
               title="{t('Detail')}"
               onClick={() => {

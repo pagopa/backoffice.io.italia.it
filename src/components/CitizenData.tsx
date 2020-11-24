@@ -4,12 +4,12 @@ import { BPDCitizen } from "../generated/definitions/BPDCitizen";
 import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 
-interface CitizenDataProps {
+type CitizenDataProps = {
   resultData: BPDCitizen;
-}
+};
 
 export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       <div className="d-flex align-items-center">

@@ -8,19 +8,10 @@ import { TypeofApiResponse } from "italia-ts-commons/lib/requests";
 import { BackofficeClient } from "../helpers/client";
 import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from "react-i18next";
-import {
-  createBrowserHistory,
-  createMemoryHistory,
-  createHashHistory,
-  createLocation,
-  Location,
-  LocationDescriptor,
-  History,
-  MemoryHistory
-} from "history";
+import { Location } from "history";
 
 type Props = {
-  location: Location;
+  location: Location<{ citizenid: string }>;
 };
 
 export const Citizen: React.FunctionComponent<Props> = props => {
@@ -36,25 +27,25 @@ export const Citizen: React.FunctionComponent<Props> = props => {
   function getUserToken(): string {
     return window.sessionStorage.getItem("userToken") || "";
   }
-  function setCitizenId(citizenid: string) {
+  function setCitizenId(citizenid: string): void {
     window.sessionStorage.setItem("citizenid", citizenid);
   }
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (props.location.state) {
-      const citizenid = props.location.state.citizenid;
       // useful to have value also in case of page-refresh
       setCitizenId(props.location.state.citizenid);
     }
 
     // TaskEither
+    // tslint:disable-next-line: no-floating-promises
     tryCatch(
       () =>
         BackofficeClient.GetBPDCitizen({
-          "x-citizen-id": getCitizenId(),
-          Bearer: `Bearer ${getUserToken()}`
+          Bearer: `Bearer ${getUserToken()}`,
+          "x-citizen-id": getCitizenId()
         }),
       toError
     )

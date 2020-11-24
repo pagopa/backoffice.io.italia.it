@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { Citizen } from "../components/Citizen";
 import TransactionsList from "../components/TransactionsList";
+import { Location } from "history";
 
-function Sheet(props) {
+type Props = {
+  location: Location<{ citizenid: string }>;
+};
+
+function Sheet(props: Props) {
   return (
     <>
       <Citizen {...props} />

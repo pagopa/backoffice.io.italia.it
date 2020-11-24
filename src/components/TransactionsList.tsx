@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import "./TransactionsList.css";
 import viewIcon from "/assets/view.svg";
 import { useTranslation } from "react-i18next";
 
-type Props = unknown;
-type TransactionsListState = {};
-
-function TransactionsList(props) {
+function TransactionsList() {
   function openDetail(index: number): void {
     const idDetail = `detail${index}`;
     document.getElementById(idDetail)?.classList.toggle("d-none");
   }
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -26,7 +23,7 @@ function TransactionsList(props) {
           <div className="col-sm-2 font-weight-bold">Circuit</div>
           <div className="col-sm-1 font-weight-bold"></div>
         </div>
-        {[...Array(30)].map((elementInArray, index) => (
+        {[...Array(30)].map(index => (
           <div
             key={index}
             className={`TransactionsList__row row py-2 ${

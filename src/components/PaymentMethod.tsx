@@ -12,7 +12,7 @@ type PaymentMethodProps = {
 };
 
 export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <TabPane tabId={props.index}>
       <div className="container my-3">
