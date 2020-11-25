@@ -9,7 +9,7 @@ import { BackofficeClient } from "../helpers/client";
 import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from "react-i18next";
 import { ILocation } from "../@types/location";
-import { FiscalCode } from "../../generated/definitions/FiscalCode";
+import { SupportToken } from "../../generated/definitions/SupportToken";
 
 type Props = {
   location: ILocation;
@@ -23,9 +23,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
 
   function getCitizenId(): string {
     const CitizenId = window.sessionStorage.getItem("citizenid") || "";
-    return FiscalCode.is(CitizenId.toUpperCase())
-      ? CitizenId.toUpperCase()
-      : CitizenId;
+    return SupportToken.is(CitizenId) ? CitizenId : CitizenId.toUpperCase();
   }
   function getUserToken(): string {
     return window.sessionStorage.getItem("userToken") || "";
