@@ -8,10 +8,10 @@ import { TypeofApiResponse } from "italia-ts-commons/lib/requests";
 import { BackofficeClient } from "../helpers/client";
 import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from "react-i18next";
-import { Location } from "history";
+import { ILocation } from "../@types/location";
 
 type Props = {
-  location: Location<{ citizenid: string }>;
+  location: ILocation;
 };
 
 export const Citizen: React.FunctionComponent<Props> = props => {
