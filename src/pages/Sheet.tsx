@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { ILocation } from "../@types/location";
 import { Citizen } from "../components/Citizen";
 import TransactionsList from "../components/TransactionsList";
-import { Location } from "history";
-import { setCitizenId } from "../helpers/coredata";
 
 type Props = {
-  location: Location<{ citizenid: string }>;
+  location: ILocation;
 };
 
 const Sheet = (props: Props) => {
