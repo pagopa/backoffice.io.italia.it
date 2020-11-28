@@ -22,7 +22,18 @@ const resources = {
       "Error 500": "Generic error",
       Detail: "See detail",
       "Transactions list": "Transactions list",
-      "Transaction details": "Transaction details"
+      "Transaction details": "Transaction details",
+      Datetime: "Datetime",
+      Acquirer: "Acquirer",
+      "Circuit name": "Circuit name",
+      Amount: "Amount",
+      HPAN: "HPAN",
+      "ABI Acquirer": "ABI Acquirer",
+      "Acquirer transaction ID": "# Acquirer trans.",
+      "Issuer transaction ID": "# Issuer trans.",
+      "Operation type": "Operation type",
+      Score: "Score",
+      "Cashback period": "Cashback period"
     }
   },
   it: {
@@ -43,7 +54,18 @@ const resources = {
       "Error 500": "Errore generico",
       Detail: "Visualizza dettaglio",
       "Transactions list": "Lista transazioni",
-      "Transaction details": "Dettaglio transazione"
+      "Transaction details": "Dettaglio transazione",
+      Datetime: "Data e ora",
+      Acquirer: "Acquirer",
+      "Circuit name": "Nome circuito",
+      Amount: "Importo",
+      HPAN: "HPAN",
+      "ABI Acquirer": "Acquirer ABI",
+      "Acquirer transaction ID": "# trans. acquirer",
+      "Issuer transaction ID": "# trans. issuer",
+      "Operation type": "Tipo operazione",
+      Score: "Punti",
+      "Cashback period": "Periodo cashback"
     }
   }
 };

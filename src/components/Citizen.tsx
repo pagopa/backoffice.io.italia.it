@@ -9,6 +9,7 @@ import { BackofficeClient } from "../helpers/client";
 import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from "react-i18next";
 import { Location } from "history";
+import { getCitizenId, getUserToken } from "../helpers/coredata";
 
 type Props = {
   location: Location<{ citizenid: string }>;
@@ -20,32 +21,18 @@ export const Citizen: React.FunctionComponent<Props> = props => {
   );
   const [resultErr, setResulterr] = useState<string>("");
 
-  function getCitizenId(): string {
-    const CitizenId = window.sessionStorage.getItem("citizenid") || "";
-    return CitizenId.toUpperCase();
-  }
-  function getUserToken(): string {
-    return window.sessionStorage.getItem("userToken") || "";
-  }
-  function setCitizenId(citizenid: string): void {
-    window.sessionStorage.setItem("citizenid", citizenid);
-  }
-
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (props.location.state) {
-      // useful to have value also in case of page-refresh
-      setCitizenId(props.location.state.citizenid);
-    }
-
     // TaskEither
     // tslint:disable-next-line: no-floating-promises
     tryCatch(
       () =>
         BackofficeClient.GetBPDCitizen({
           Bearer: `Bearer ${getUserToken()}`,
-          "x-citizen-id": getCitizenId()
+          "x-citizen-id": props.location.state
+            ? props.location.state.citizenid
+            : getCitizenId()
         }),
       toError
     )
