@@ -29,6 +29,7 @@ variables:
   NODE_VERSION: '10.14.1'
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
   BLOB_CONTAINER_NAME: '$web'
+  REACT_APP_API_URL: 'https://api.io.italia.it'
 
 parameters:
   - name: 'TEST_ENABLE_DEPLOY'
@@ -84,8 +85,6 @@ stages:
     jobs:
       # A1) Checkout, install module and build code (use Windows OS)
       - job: make_build
-        variables:
-          react_app_api_url: https://api.io.italia.it
         steps:
           - template: azure-templates/make-build-steps.yml
             parameters:
