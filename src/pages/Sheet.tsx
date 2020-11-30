@@ -11,10 +11,10 @@ type Props = {
 const Sheet = (props: Props) => {
   useEffect(() => {
     if (props.location.state) {
-      // useful to have value also in case of page-refresh
+      // "state" lost value in case of refresh, so we need to persist data in some way (sessionStorage, for now)
       setCitizenId(props.location.state.citizenid);
     }
-  });
+  }, [props.location.state]);
 
   return (
     <>
