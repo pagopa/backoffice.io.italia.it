@@ -21,11 +21,10 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
   const [resultData, setResultdata] = useState<BPDTransactionList | undefined>(
     undefined
   );
+  const [resultErr, setResulterr] = useState<string>("");
   const { t } = useTranslation();
 
   useEffect(() => {
-    // TaskEither
-    // tslint:disable-next-line: no-floating-promises
     tryCatch(
       () =>
         BackofficeClient.GetBPDTransactions({
@@ -54,12 +53,16 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
           setResultdata(_.value);
         }
       })
-      .run();
+      .run()
+      .catch(_ => {
+        setResulterr(_.value);
+      });
   }, []);
 
   return (
     <>
       <h3>{t("Transactions list")}</h3>
+      {resultErr && <div className="alert">Error: {resultErr}</div>}
       <div className="mt-3">
         <div className="row border-bottom border-dark py-2">
           <div className="col-sm-2 font-weight-bold">{t("Datetime")}</div>

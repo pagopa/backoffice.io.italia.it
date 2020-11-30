@@ -24,8 +24,6 @@ export const Citizen: React.FunctionComponent<Props> = props => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // TaskEither
-    // tslint:disable-next-line: no-floating-promises
     tryCatch(
       () =>
         BackofficeClient.GetBPDCitizen({
@@ -74,7 +72,10 @@ export const Citizen: React.FunctionComponent<Props> = props => {
           setResulterr(`500, ${t("Error 500")}`);
         }
       })
-      .run();
+      .run()
+      .catch(_ => {
+        setResulterr(_.value);
+      });
   }, []);
 
   return (
@@ -82,7 +83,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
       {resultData ? (
         <CitizenData resultData={resultData} />
       ) : (
-        <h2>{resultErr}</h2>
+        <h2>Error: {resultErr}</h2>
       )}
     </>
   );
