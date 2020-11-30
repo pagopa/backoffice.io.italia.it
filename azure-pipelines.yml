@@ -91,18 +91,18 @@ stages:
             parameters:
               make: build
             
-      # # A2) Analyze source code to find errors with lint (use Linux VM)
-      # - job: lint
-      #   pool:
-      #     vmImage: 'ubuntu-latest'
-      #   steps:
-      #     - template: azure-templates/make-build-steps.yml
-      #       parameters:
-      #         make: install_dependencies
+      # A2) Analyze source code to find errors with lint (use Linux VM)
+      - job: lint
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - template: azure-templates/make-build-steps.yml
+            parameters:
+              make: install_dependencies
 
-      #     - script: |
-      #         yarn lint
-      #       displayName: 'Lint'
+          - script: |
+              yarn lint
+            displayName: 'Lint'
 
       # A3) Run Danger (skipping if not executing on a PR)
       - job: danger
