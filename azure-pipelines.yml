@@ -84,6 +84,8 @@ stages:
     jobs:
       # A1) Checkout, install module and build code (use Windows OS)
       - job: make_build
+        variables:
+          react_app_api_url: https://api.io.italia.it
         steps:
           - template: azure-templates/make-build-steps.yml
             parameters:
