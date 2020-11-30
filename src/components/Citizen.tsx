@@ -9,7 +9,7 @@ import { BackofficeClient } from "../helpers/client";
 import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from "react-i18next";
 import { ILocation } from "../@types/location";
-import { SupportToken } from "../../generated/definitions/SupportToken";
+import { getCitizenId, getUserToken } from "../helpers/coredata";
 
 type Props = {
   location: ILocation;
@@ -21,32 +21,16 @@ export const Citizen: React.FunctionComponent<Props> = props => {
   );
   const [resultErr, setResulterr] = useState<string>("");
 
-  function getCitizenId(): string {
-    const CitizenId = window.sessionStorage.getItem("citizenid") || "";
-    return SupportToken.is(CitizenId) ? CitizenId : CitizenId.toUpperCase();
-  }
-  function getUserToken(): string {
-    return window.sessionStorage.getItem("userToken") || "";
-  }
-  function setCitizenId(citizenid: string): void {
-    window.sessionStorage.setItem("citizenid", citizenid);
-  }
-
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (props.location.state) {
-      // useful to have value also in case of page-refresh
-      setCitizenId(props.location.state.citizenid);
-    }
-
-    // TaskEither
-    // tslint:disable-next-line: no-floating-promises
     tryCatch(
       () =>
         BackofficeClient.GetBPDCitizen({
           Bearer: `Bearer ${getUserToken()}`,
-          "x-citizen-id": getCitizenId()
+          "x-citizen-id": props.location.state
+            ? props.location.state.citizenid
+            : getCitizenId()
         }),
       toError
     )
@@ -88,7 +72,10 @@ export const Citizen: React.FunctionComponent<Props> = props => {
           setResulterr(`500, ${t("Error 500")}`);
         }
       })
-      .run();
+      .run()
+      .catch(_ => {
+        setResulterr(_.value);
+      });
   }, []);
 
   return (
@@ -96,7 +83,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
       {resultData ? (
         <CitizenData resultData={resultData} />
       ) : (
-        <h2>{resultErr}</h2>
+        <h2>Error: {resultErr}</h2>
       )}
     </>
   );

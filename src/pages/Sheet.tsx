@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ILocation } from "../@types/location";
 import { Citizen } from "../components/Citizen";
 import TransactionsList from "../components/TransactionsList";
+import { setCitizenId } from "../helpers/coredata";
 
 type Props = {
   location: ILocation;
 };
 
 const Sheet = (props: Props) => {
+  useEffect(() => {
+    if (props.location.state) {
+      // "state" lost value in case of refresh, so we need to persist data in some way (sessionStorage, for now)
+      setCitizenId(props.location.state.citizenid);
+    }
+  }, [props.location.state]);
+
   return (
     <>
       <Citizen {...props} />
 
       <hr />
 
-      <TransactionsList />
+      <TransactionsList {...props} />
     </>
   );
 };
