@@ -11,10 +11,10 @@ import { BackofficeClient } from "../helpers/client";
 import { Transaction } from "./Transaction";
 import { toError } from "fp-ts/lib/Either";
 import { getCitizenId, getUserToken } from "../helpers/coredata";
-import { Location } from "history";
+import { ILocation } from "../@types/location";
 
 type Props = {
-  location: Location<{ citizenid: string }>;
+  location: ILocation;
 };
 
 export const TransactionsList: React.FunctionComponent<Props> = props => {
