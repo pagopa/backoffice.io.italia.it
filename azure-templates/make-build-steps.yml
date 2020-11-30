@@ -12,7 +12,7 @@ parameters:
   - name: 'cache_version_id'
     type: string
     default: $(CACHE_VERSION_ID)
-  
+
 steps:
   - checkout: self
     displayName: 'Checkout'

@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel --port 3000 src/index.html --out-dir build/debug",
-    "prebuild": "tsc --noEmit",
+    "prebuild": "npm-run-all prebuild:*",
+    "prebuild:clean": "shx rm -rf build",
+    "prebuild:tsc": "tsc --noEmit",
     "build": "parcel build src/index.html --out-dir build/release --public-url ./",
     "test": "jest -coverage",
     "lint": "tslint -p .",
