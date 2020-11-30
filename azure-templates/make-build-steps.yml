@@ -12,7 +12,10 @@ parameters:
   - name: 'cache_version_id'
     type: string
     default: $(CACHE_VERSION_ID)
-  
+
+variables:
+  react_app_api_url: https://api.io.italia.it
+
 steps:
   - checkout: self
     displayName: 'Checkout'
