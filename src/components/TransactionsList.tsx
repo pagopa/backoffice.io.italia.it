@@ -1,59 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./TransactionsList.css";
-import viewIcon from "/assets/view.svg";
 import { useTranslation } from "react-i18next";
+import { BPDTransactionList } from "../../generated/definitions/BPDTransactionList";
+import { BPDTransaction } from "../../generated/definitions/BPDTransaction";
+import { GetBPDTransactionsT } from "../../generated/definitions/requestTypes";
+import { fromEither, fromLeft, tryCatch } from "fp-ts/lib/TaskEither";
+import { readableReport } from "italia-ts-commons/lib/reporters";
+import { TypeofApiResponse } from "italia-ts-commons/lib/requests";
+import { BackofficeClient } from "../helpers/client";
+import { Transaction } from "./Transaction";
+import { toError } from "fp-ts/lib/Either";
+import { getCitizenId, getUserToken } from "../helpers/coredata";
+import { ILocation } from "../@types/location";
 
-const TransactionsList = () => {
-  function openDetail(index: number): void {
-    const idDetail = `detail${index}`;
-    document.getElementById(idDetail)?.classList.toggle("d-none");
-  }
+type Props = {
+  location: ILocation;
+};
+
+export const TransactionsList: React.FunctionComponent<Props> = props => {
+  const [resultData, setResultdata] = useState<BPDTransactionList | undefined>(
+    undefined
+  );
+  const [resultErr, setResulterr] = useState<string>("");
   const { t } = useTranslation();
+
+  useEffect(() => {
+    tryCatch(
+      () =>
+        BackofficeClient.GetBPDTransactions({
+          Bearer: `Bearer ${getUserToken()}`,
+          "x-citizen-id": props.location.state
+            ? props.location.state.citizenid
+            : getCitizenId()
+        }),
+      toError
+    )
+      .foldTaskEither(
+        apiError =>
+          fromLeft<Error, TypeofApiResponse<GetBPDTransactionsT>>(apiError),
+        apiResponse =>
+          fromEither(
+            apiResponse.mapLeft(err => {
+              return new Error(readableReport(err));
+            })
+          )
+      )
+      .mapLeft(_ => {
+        // TODO: Validation Error
+      })
+      .map(_ => {
+        if (_.status === 200) {
+          setResultdata(_.value);
+        }
+      })
+      .run()
+      .catch(_ => {
+        setResulterr(_.value);
+      });
+  }, []);
 
   return (
     <>
       <h3>{t("Transactions list")}</h3>
-
+      {resultErr && <div className="alert">Error: {resultErr}</div>}
       <div className="mt-3">
         <div className="row border-bottom border-dark py-2">
-          <div className="col-sm-2 font-weight-bold">Data ora</div>
-          <div className="col-sm-2 font-weight-bold">Importo</div>
-          <div className="col-sm-2 font-weight-bold">Cashback</div>
-          <div className="col-sm-3 font-weight-bold">HPAN</div>
-          <div className="col-sm-2 font-weight-bold">Circuit</div>
+          <div className="col-sm-2 font-weight-bold">{t("Datetime")}</div>
+          <div className="col-sm-3 font-weight-bold">{t("Acquirer")}</div>
+          <div className="col-sm-2 font-weight-bold">{t("Circuit name")}</div>
+          <div className="col-sm-2 font-weight-bold">{t("Amount")}</div>
+          <div className="col-sm-2 font-weight-bold">{t("HPAN")}</div>
           <div className="col-sm-1 font-weight-bold"></div>
         </div>
-        {[...Array(30)].map(index => (
-          <div
-            key={index}
-            className={`TransactionsList__row row py-2 ${
-              index % 2 === 1 ? "bg-light" : ""
-            }`}
-          >
-            <div className="col-sm-2">01/12/20 12:23</div>
-            <div className="col-sm-2 ">300,21</div>
-            <div className="col-sm-2 ">30,00</div>
-            <div className="col-sm-3 ">*432</div>
-            <div className="col-sm-2 ">Visa </div>
-            <div className="col-sm-1 p-0">
-              <img
-                src={viewIcon}
-                className="mr-3 cursor-pointer"
-                height="24"
-                onClick={() => {
-                  openDetail(index);
-                }}
-              />
-              <span className="badge badge-primary">RAW</span>
-            </div>
-            <div
-              className="col-12 d-none TransactionsList__detail"
-              id={`detail${index}`}
-            >
-              {t("Transaction details")}
-            </div>
-          </div>
-        ))}
+        {resultData &&
+          resultData.transactions.map((el: BPDTransaction, index: number) => (
+            <Transaction el={el} index={index} key={index} />
+          ))}
       </div>
     </>
   );
