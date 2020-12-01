@@ -45,7 +45,7 @@ export const getUserAgentApplication = () => {
     },
     cache: {
       cacheLocation: "sessionStorage",
-      storeAuthStateInCookie: true
+      storeAuthStateInCookie: false
     }
   });
 };
