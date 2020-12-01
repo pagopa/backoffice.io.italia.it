@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Paymethods } from "./Paymethods";
 import { BPDCitizen } from "../../generated/definitions/BPDCitizen";
 import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
+import { RawModal } from "./RawModal";
 
 type CitizenDataProps = {
   resultData: BPDCitizen;
@@ -10,10 +11,30 @@ type CitizenDataProps = {
 
 export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
   const { t } = useTranslation();
+  const [modalState, setModalstate] = useState<boolean>(false);
+  const [modalContent, setModalcontent] = useState<string>("");
+
+  function popModal(data: object): void {
+    setModalcontent(JSON.stringify(data, null, 3));
+    setModalstate(!modalState);
+  }
+
   return (
     <>
+      <RawModal state={modalState} jsonobj={modalContent} />
+
       <div className="d-flex align-items-center">
-        <h1>{t("Citizen profile")}</h1>
+        <h1>
+          {t("Citizen profile")}
+          <button
+            className="ml-2 btn btn-sm btn-primary"
+            onClick={() => {
+              popModal(props.resultData);
+            }}
+          >
+            RAW
+          </button>
+        </h1>
         <span className="text-secondary small ml-auto">
           {t("Searched string")}: {window.sessionStorage.getItem("citizenid")}
         </span>

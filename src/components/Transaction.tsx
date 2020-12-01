@@ -8,6 +8,7 @@ type TransactionProps = {
   el: BPDTransaction;
   index: number;
   key?: number;
+  popModal: () => void;
 };
 
 export const Transaction: React.FunctionComponent<TransactionProps> = props => {
@@ -24,7 +25,14 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
       </div>
       <div className="col-sm-2 ">*{props.el.hpan.slice(-5)}</div>
       <div className="col-sm-1 p-0">
-        <span className="badge badge-primary">RAW</span>
+        <span
+          className="badge badge-primary"
+          onClick={() => {
+            props.popModal(props.el);
+          }}
+        >
+          RAW
+        </span>
       </div>
       <div className="col-12 my-3 TransactionsList__detail">
         <h5 className="border-bottom">{t("Transaction details")}</h5>
