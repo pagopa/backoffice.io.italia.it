@@ -8,7 +8,7 @@ type TransactionProps = {
   el: BPDTransaction;
   index: number;
   key?: number;
-  popModal: () => void;
+  popModal: (el: BPDTransaction) => void;
 };
 
 export const Transaction: React.FunctionComponent<TransactionProps> = props => {
