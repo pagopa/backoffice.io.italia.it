@@ -12,6 +12,7 @@ import { Transaction } from "./Transaction";
 import { toError } from "fp-ts/lib/Either";
 import { getCitizenId, getUserToken } from "../helpers/coredata";
 import { ILocation } from "../@types/location";
+import { RawModal } from "./RawModal";
 
 type Props = {
   location: ILocation;
@@ -22,6 +23,8 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
     undefined
   );
   const [resultErr, setResulterr] = useState<string>("");
+  const [modalState, setModalstate] = useState<boolean>(false);
+  const [modalContent, setModalcontent] = useState<string>("");
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -59,8 +62,14 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
       });
   }, []);
 
+  function popModal(data: object): void {
+    setModalcontent(JSON.stringify(data, null, 3));
+    setModalstate(!modalState);
+  }
+
   return (
     <>
+      <RawModal state={modalState} jsonobj={modalContent} />
       <h3>{t("Transactions list")}</h3>
       {resultErr && <div className="alert">Error: {resultErr}</div>}
       <div className="mt-3">
@@ -74,7 +83,12 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
         </div>
         {resultData &&
           resultData.transactions.map((el: BPDTransaction, index: number) => (
-            <Transaction el={el} index={index} key={index} />
+            <Transaction
+              el={el}
+              index={index}
+              key={index}
+              popModal={popModal}
+            />
           ))}
       </div>
     </>

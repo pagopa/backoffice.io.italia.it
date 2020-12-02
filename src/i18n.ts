@@ -33,7 +33,8 @@ const resources = {
       "Issuer transaction ID": "# Issuer trans.",
       "Operation type": "Operation type",
       Score: "Score",
-      "Cashback period": "Cashback period"
+      "Cashback period": "Cashback period",
+      Close: "Close"
     }
   },
   it: {
@@ -65,7 +66,8 @@ const resources = {
       "Issuer transaction ID": "# trans. issuer",
       "Operation type": "Tipo operazione",
       Score: "Punti",
-      "Cashback period": "Periodo cashback"
+      "Cashback period": "Periodo cashback",
+      Close: "Chiudi"
     }
   }
 };
