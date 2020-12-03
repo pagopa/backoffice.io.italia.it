@@ -35,9 +35,9 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
             RAW
           </button>
         </h1>
-        <span className="text-secondary small ml-auto">
+        <div className="text-secondary small ml-auto col-md-4 text-truncate">
           {t("Searched string")}: {window.sessionStorage.getItem("citizenid")}
-        </span>
+        </div>
       </div>
       <div className="row">
         <div className="col-md-8">
