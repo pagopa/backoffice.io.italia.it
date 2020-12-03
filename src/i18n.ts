@@ -34,7 +34,8 @@ const resources = {
       "Operation type": "Operation type",
       Score: "Score",
       "Cashback period": "Cashback period",
-      Close: "Close"
+      Close: "Close",
+      Cancelled: "Cancelled"
     }
   },
   it: {
@@ -67,7 +68,8 @@ const resources = {
       "Operation type": "Tipo operazione",
       Score: "Punti",
       "Cashback period": "Periodo cashback",
-      Close: "Chiudi"
+      Close: "Chiudi",
+      Cancelled: "Cancellato"
     }
   }
 };

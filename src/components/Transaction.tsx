@@ -3,6 +3,7 @@ import { BPDTransaction } from "../../generated/definitions/BPDTransaction";
 import { useTranslation } from "react-i18next";
 import { format, parseISO } from "date-fns";
 import { fromNullable } from "fp-ts/lib/Option";
+import classNames from "classnames";
 
 type TransactionProps = {
   el: BPDTransaction;
@@ -14,7 +15,13 @@ type TransactionProps = {
 export const Transaction: React.FunctionComponent<TransactionProps> = props => {
   const { t } = useTranslation();
   return (
-    <div key={props.index} className="TransactionsList__row row py-2 ">
+    <div
+      key={props.index}
+      className={classNames({
+        cancelled: !props.el.enabled,
+        "py-2 row TransactionsList__row": true
+      })}
+    >
       <div className="col-sm-2">
         {format(parseISO(props.el.trx_timestamp), "dd/MM/yyyy HH:mm")}
       </div>
