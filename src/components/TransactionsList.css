@@ -27,3 +27,8 @@
 .TransactionsList__row.active  .viewIcon {
     opacity: 0.4;
 }
+
+.TransactionsList__row.cancelled  {
+    text-decoration: line-through;
+    color: #aaaaaa;
+}

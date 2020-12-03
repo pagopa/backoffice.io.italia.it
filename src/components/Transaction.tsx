@@ -23,6 +23,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
       key={props.index}
       className={classNames({
         active: activeClass,
+        cancelled: !props.el.enabled,
         "py-2 row TransactionsList__row": true
       })}
     >
