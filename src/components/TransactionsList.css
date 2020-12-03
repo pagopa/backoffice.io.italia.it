@@ -22,6 +22,7 @@
 .viewIcon {
     height: 30px;
     margin-right: .5rem;
+    cursor: pointer;
 }
 .TransactionsList__row.active  .viewIcon {
     opacity: 0.4;
