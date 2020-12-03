@@ -4,6 +4,8 @@ import { BPDCitizen } from "../../generated/definitions/BPDCitizen";
 import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { RawModal } from "./RawModal";
+import classNames from "classnames";
+import "./CitizenData.css";
 
 type CitizenDataProps = {
   resultData: BPDCitizen;
@@ -24,7 +26,11 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
       <RawModal state={modalState} jsonobj={modalContent} />
 
       <div className="d-flex align-items-center">
-        <h1>
+        <h1
+          className={classNames({
+            cancelled: !props.resultData.enabled
+          })}
+        >
           {t("Citizen profile")}
           <button
             className="ml-2 btn btn-sm btn-primary"
@@ -35,6 +41,9 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
             RAW
           </button>
         </h1>
+        {!props.resultData.enabled && (
+          <span className="badge badge-secondary ml-2">{t("Cancelled")}</span>
+        )}
         <div className="text-secondary small ml-auto col-md-4 text-truncate">
           {t("Searched string")}: {window.sessionStorage.getItem("citizenid")}
         </div>

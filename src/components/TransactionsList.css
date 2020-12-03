@@ -18,3 +18,8 @@
     font-weight: 300 !important;
     display: block;
 }
+
+.TransactionsList__row.cancelled  {
+    text-decoration: line-through;
+    color: #aaaaaa;
+}
