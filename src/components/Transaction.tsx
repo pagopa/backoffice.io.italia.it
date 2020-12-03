@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { BPDTransaction } from "../../generated/definitions/BPDTransaction";
 import { useTranslation } from "react-i18next";
 import { format, parseISO } from "date-fns";
 import { fromNullable } from "fp-ts/lib/Option";
+import viewIcon from "../assets/view.svg";
 import classNames from "classnames";
 
 type TransactionProps = {
@@ -14,10 +15,14 @@ type TransactionProps = {
 
 export const Transaction: React.FunctionComponent<TransactionProps> = props => {
   const { t } = useTranslation();
+
+  const [activeClass, setActiveclass] = useState<boolean>(false);
+
   return (
     <div
       key={props.index}
       className={classNames({
+        active: activeClass,
         cancelled: !props.el.enabled,
         "py-2 row TransactionsList__row": true
       })}
@@ -32,6 +37,13 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
       </div>
       <div className="col-sm-2 ">*{props.el.hpan.slice(-5)}</div>
       <div className="col-sm-1 p-0">
+        <img
+          className="viewIcon"
+          src={viewIcon}
+          onClick={() => {
+            setActiveclass(!activeClass);
+          }}
+        />
         <span
           className="badge badge-primary"
           onClick={() => {
