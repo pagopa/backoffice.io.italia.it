@@ -7,6 +7,8 @@
  */
 import { UserAgentApplication } from "msal";
 
+const b2cscopes = process.env.ADB2C_TENANT_B2CSCOPES?.split(",") || [];
+
 interface IMsalConfig {
   audience: string;
   authority: string;
@@ -19,15 +21,11 @@ interface IMsalConfig {
 }
 
 const configuration: IMsalConfig = {
-  audience:
-    "https://iobackoffice.b2clogin.com/iobackoffice.onmicrosoft.com/c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06",
-  authority:
-    "https://iobackoffice.b2clogin.com/iobackoffice.onmicrosoft.com/B2C_1_backoffice",
-  b2cScopes: [
-    "https://iobackoffice.onmicrosoft.com/c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06/ProfileRead"
-  ],
+  audience: process.env.ADB2C_TENANT_AUDIENCE || "",
+  authority: process.env.ADB2C_TENANT_AUTHORITY || "",
+  b2cScopes: b2cscopes,
   changePasswordLink: "",
-  clientID: "c2c9dbf8-9fc3-4f69-b8a6-c87d10d0ab06",
+  clientID: process.env.ADB2C_TENANT_CLIENTID || "",
   redirectUri: window.location.origin,
   validateAuthority: false,
 
