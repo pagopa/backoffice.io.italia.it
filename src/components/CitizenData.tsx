@@ -79,23 +79,7 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
             <Paymethods paylist={props.resultData.payment_methods} />
           )}
         </div>
-        <div className="col-md-4">
-          <div className="bg-light p-3 p-md-5 mt-3 mt-md-0">
-            <h6 className="text-uppercase">
-              Situazione Premio al{" "}
-              <span className="text-primary">30/10/2020</span>{" "}
-            </h6>
-            <div className="h1 p-2 bg-white rounded-lg d-inline-block shadow">
-              110°
-            </div>
-            <div className="h2">
-              1120 <span className="h6">punti</span>
-            </div>
-            <div className="h3">
-              22020 <span className="h6">transazioni</span>
-            </div>
-          </div>
-        </div>
+        <div className="col-md-4"></div>
       </div>
     </>
   );
