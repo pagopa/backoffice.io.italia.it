@@ -29,3 +29,26 @@
 .PaymentMethod__state.ACTIVE {
     border-color: #37a51b transparent transparent transparent;
 }
+.PaymentMethod__history .expandbutton {
+    text-decoration: none;
+    line-height: 1;
+}
+.PaymentMethod__history .expandbutton:hover {
+    text-decoration: none;
+    color: #37a51b;
+}
+.PaymentMethod__history .expandbutton:after {
+    content: ' \2192';
+    font-weight: 600;
+}
+.PaymentMethod__history.active .expandbutton:after {
+    content: ' \2191';
+    font-weight: 600;
+}
+
+.PaymentMethod__history .PaymentMethod__hlist__list {
+    display: none;
+}
+.PaymentMethod__history.active .PaymentMethod__hlist__list {
+    display: flex;
+}

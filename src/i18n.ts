@@ -35,7 +35,12 @@ const resources = {
       Score: "Score",
       "Cashback period": "Cashback period",
       Close: "Close",
-      Cancelled: "Cancelled"
+      Cancelled: "Cancelled",
+      Yes: "Yes",
+      No: "No",
+      "Crono method": "History of this payment method",
+      Enrollment: "Enrollment",
+      Cancellation: "Cancellation"
     }
   },
   it: {
@@ -69,7 +74,12 @@ const resources = {
       Score: "Punti",
       "Cashback period": "Periodo cashback",
       Close: "Chiudi",
-      Cancelled: "Cancellato"
+      Cancelled: "Cancellato",
+      Yes: "Sì",
+      No: "No",
+      "Crono method": "Cronologia relativa a questo metodo",
+      Enrollment: "Iscrizione",
+      Cancellation: "Cancellazione"
     }
   }
 };
