@@ -40,7 +40,9 @@ const resources = {
       No: "No",
       "Crono method": "History of this payment method",
       Enrollment: "Enrollment",
-      Cancellation: "Cancellation"
+      Cancellation: "Cancellation",
+      Enabled: "Enabled",
+      Channel: "Channel"
     }
   },
   it: {
@@ -79,7 +81,9 @@ const resources = {
       No: "No",
       "Crono method": "Cronologia relativa a questo metodo",
       Enrollment: "Iscrizione",
-      Cancellation: "Cancellazione"
+      Cancellation: "Cancellazione",
+      Enabled: "Abilitazione",
+      Channel: "Canale di iscrizione"
     }
   }
 };
