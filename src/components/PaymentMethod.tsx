@@ -28,6 +28,7 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
   >(undefined);
   const [modalState, setModalstate] = useState<boolean>(false);
   const [modalContent, setModalcontent] = useState<string>("");
+  const [resultErr, setResulterr] = useState<string>("");
 
   function popModal(data: object): void {
     setModalcontent(JSON.stringify(data, null, 3));
@@ -65,7 +66,9 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
         }
       })
       .run()
-      .catch(_ => {});
+      .catch(_ => {
+        setResulterr(_.value);
+      });
   }, []);
 
   return (
@@ -101,6 +104,7 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
           ></PaymentMethodHistory>
         )}
       </div>
+      {resultErr && <div className="alert">Error: {resultErr}</div>}
     </TabPane>
   );
 };
