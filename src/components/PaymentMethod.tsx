@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TabPane } from "reactstrap";
 import { PaymentMethod as PaymentMethodDef } from "../../generated/definitions/PaymentMethod";
 import { useTranslation } from "react-i18next";
+import { PaymentMethodDetails } from "../../generated/definitions/PaymentMethodDetails";
+import { GetBPDPaymentInstrumentT } from "../../generated/definitions/requestTypes";
 import { format, parseISO } from "date-fns";
 import { fromNullable } from "fp-ts/lib/Option";
+import { fromEither, fromLeft, tryCatch } from "fp-ts/lib/TaskEither";
+import { readableReport } from "italia-ts-commons/lib/reporters";
+import { TypeofApiResponse } from "italia-ts-commons/lib/requests";
+import { BackofficeClient } from "../helpers/client";
+import { toError } from "fp-ts/lib/Either";
+import { getCitizenId, getUserToken } from "../helpers/coredata";
+import { PaymentMethodHistory } from "./PaymentMethodHistory";
+import { RawModal } from "./RawModal";
 
 type PaymentMethodProps = {
   el: PaymentMethodDef;
@@ -13,8 +23,57 @@ type PaymentMethodProps = {
 
 export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props => {
   const { t } = useTranslation();
+  const [resultData, setResultdata] = useState<
+    PaymentMethodDetails | undefined
+  >(undefined);
+  const [modalState, setModalstate] = useState<boolean>(false);
+  const [modalContent, setModalcontent] = useState<string>("");
+  const [resultErr, setResulterr] = useState<string>("");
+
+  function popModal(data: object): void {
+    setModalcontent(JSON.stringify(data, null, 3));
+    setModalstate(!modalState);
+  }
+
+  useEffect(() => {
+    tryCatch(
+      () =>
+        BackofficeClient.GetBPDPaymentInstrument({
+          Bearer: `Bearer ${getUserToken()}`,
+          hpan: props.el.payment_instrument_hpan,
+          "x-citizen-id": getCitizenId()
+        }),
+      toError
+    )
+      .foldTaskEither(
+        apiError =>
+          fromLeft<Error, TypeofApiResponse<GetBPDPaymentInstrumentT>>(
+            apiError
+          ),
+        apiResponse =>
+          fromEither(
+            apiResponse.mapLeft(err => {
+              return new Error(readableReport(err));
+            })
+          )
+      )
+      .mapLeft(_ => {
+        // TODO: Validation Error
+      })
+      .map(_ => {
+        if (_.status === 200) {
+          setResultdata(_.value);
+        }
+      })
+      .run()
+      .catch(_ => {
+        setResulterr(_.value);
+      });
+  }, []);
+
   return (
     <TabPane tabId={props.index}>
+      <RawModal state={modalState} jsonobj={modalContent} />
       <div className="container my-3">
         <div className="row">
           <div className="col-sm-2 font-weight-bold">{t("State")}</div>
@@ -38,7 +97,14 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
             {props.el.payment_instrument_hpan}
           </div>
         </div>
+        {resultData && (
+          <PaymentMethodHistory
+            el={resultData}
+            popModal={popModal}
+          ></PaymentMethodHistory>
+        )}
       </div>
+      {resultErr && <div className="alert">Error: {resultErr}</div>}
     </TabPane>
   );
 };

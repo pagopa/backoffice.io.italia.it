@@ -31,7 +31,7 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
                 active: activeTab === index,
                 "d-flex align-items-center position-relative": true
               })}
-              title="{t('Detail')}"
+              title={t("Detail")}
               onClick={() => {
                 toggle(index);
               }}
