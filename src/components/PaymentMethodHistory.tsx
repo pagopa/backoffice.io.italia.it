@@ -24,8 +24,10 @@ export const PaymentMethodHistory: React.FunctionComponent<PaymentMethodHistoryP
       })}
     >
       <div className="row">
-        <div className="col-sm-2 font-weight-bold">Abilitazione</div>
+        <div className="col-sm-2 font-weight-bold">{t("Enabled")}</div>
         <div className="col-sm-4">{props.el.enabled ? t("Yes") : t("No")}</div>
+        <div className="col-sm-2 font-weight-bold">{t("Channel")}</div>
+        <div className="col-sm-4">{props.el.channel_descr}</div>
       </div>
       <div className="PaymentMethod__hlist__title my-2 bg-light rounded p-3">
         <div className="d-flex w-100">
