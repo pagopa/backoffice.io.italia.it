@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { SupportToken } from "../../generated/definitions/SupportToken";
 
 import "./FirstSearch.css";
 
@@ -28,7 +29,9 @@ const FirstSearch: React.FunctionComponent<{}> = () => {
                 to={{
                   pathname: "/sheet",
                   state: {
-                    citizenid
+                    citizenid: SupportToken.is(citizenid)
+                      ? citizenid
+                      : citizenid.toUpperCase()
                   }
                 }}
                 className="btn btn-primary d-flex align-items-center"
