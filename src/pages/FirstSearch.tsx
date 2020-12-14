@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { normalizeCitizenid } from "../helpers/coredata";
 
 import "./FirstSearch.css";
 
@@ -28,7 +29,7 @@ const FirstSearch: React.FunctionComponent<{}> = () => {
                 to={{
                   pathname: "/sheet",
                   state: {
-                    citizenid
+                    citizenid: normalizeCitizenid(citizenid)
                   }
                 }}
                 className="btn btn-primary d-flex align-items-center"

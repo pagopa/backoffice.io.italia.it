@@ -1,12 +1,16 @@
 import { SupportToken } from "../../generated/definitions/SupportToken";
 
+export function normalizeCitizenid(citizenid: string): string {
+  return SupportToken.is(citizenid) ? citizenid : citizenid.toUpperCase();
+}
+
 export const getCitizenId = () => {
-  const CitizenId = window.sessionStorage.getItem("citizenid") || "";
-  return SupportToken.is(CitizenId) ? CitizenId : CitizenId.toUpperCase();
+  return window.sessionStorage.getItem("citizenid") || "";
 };
 export const getUserToken = () => {
   return window.sessionStorage.getItem("userToken") || "";
 };
 export const setCitizenId = (citizenid: string) => {
-  window.sessionStorage.setItem("citizenid", citizenid);
+  const CitizenId = normalizeCitizenid(citizenid);
+  window.sessionStorage.setItem("citizenid", CitizenId);
 };
