@@ -52,21 +52,13 @@ export const Citizen: React.FunctionComponent<Props> = props => {
           setResultdata(_.value);
         }
         if (_.status === 400) {
-          setResulterr(
-            `400, ${t("Error 400")} "${window.sessionStorage.getItem(
-              "citizenid"
-            )}"`
-          );
+          setResulterr(`400, ${t("Error 400")} "${getCitizenId()}"`);
         }
         if (_.status === 401) {
           setResulterr(`401, ${t("Error 401")}`);
         }
         if (_.status === 404) {
-          setResulterr(
-            `404, ${t("Error 404")} "${window.sessionStorage.getItem(
-              "citizenid"
-            )}"`
-          );
+          setResulterr(`404, ${t("Error 404")} "${getCitizenId()}"`);
         }
         if (_.status === 500) {
           setResulterr(`500, ${t("Error 500")}`);

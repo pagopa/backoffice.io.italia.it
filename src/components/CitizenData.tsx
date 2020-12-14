@@ -5,6 +5,7 @@ import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { RawModal } from "./RawModal";
 import classNames from "classnames";
+import { getCitizenId } from "../helpers/coredata";
 import "./CitizenData.css";
 
 type CitizenDataProps = {
@@ -45,7 +46,7 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
           <span className="badge badge-secondary ml-2">{t("Cancelled")}</span>
         )}
         <div className="text-secondary small ml-auto col-md-4 text-truncate">
-          {t("Searched string")}: {window.sessionStorage.getItem("citizenid")}
+          {t("Searched string")}: {getCitizenId()}
         </div>
       </div>
       <div className="row">
