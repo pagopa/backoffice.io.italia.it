@@ -14,6 +14,7 @@ import { toError } from "fp-ts/lib/Either";
 import { getCitizenId, getUserToken } from "../helpers/coredata";
 import { PaymentMethodHistory } from "./PaymentMethodHistory";
 import { RawModal } from "./RawModal";
+import classNames from "classnames";
 
 type PaymentMethodProps = {
   el: PaymentMethodDef;
@@ -72,12 +73,22 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
   }, []);
 
   return (
-    <TabPane tabId={props.index}>
+    <TabPane
+      tabId={props.index}
+      className={classNames({
+        "enabled-false": !props.el.payment_instrument_enabled,
+        "status-inactive": props.el.payment_instrument_status === "INACTIVE"
+      })}
+    >
       <RawModal state={modalState} jsonobj={modalContent} />
       <div className="container my-3">
         <div className="row">
           <div className="col-sm-2 font-weight-bold">{t("State")}</div>
-          <div className="col-sm-10">{props.el.payment_instrument_status}</div>
+          <div className="col-sm-4">{props.el.payment_instrument_status}</div>
+          <div className="col-sm-2 font-weight-bold">{t("Enabled")}</div>
+          <div className="col-sm-4">
+            {props.el.payment_instrument_enabled ? t("Yes") : t("No")}
+          </div>
           <div className="col-12 py-2"></div>
           <div className="col-sm-2 font-weight-bold">{t("Insert date")}</div>
           <div className="col-sm-4">
