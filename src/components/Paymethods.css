@@ -26,9 +26,10 @@
     top: 0;
     left: 0;
 }
-.PaymentMethod__state.ACTIVE {
+.PaymentMethod__state.status-active {
     border-color: #37a51b transparent transparent transparent;
 }
+
 .PaymentMethod__history .expandbutton {
     text-decoration: none;
     line-height: 1;
@@ -51,4 +52,10 @@
 }
 .PaymentMethod__history.active .PaymentMethod__hlist__list {
     display: flex;
+}
+.tab-pane.status-inactive {
+    color: #b12d2d;
+}
+.enabled-false {
+    text-decoration: line-through !important;
 }
