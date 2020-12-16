@@ -29,7 +29,8 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
             <NavLink
               className={classNames({
                 active: activeTab === index,
-                "d-flex align-items-center position-relative": true
+                "d-flex align-items-center position-relative": true,
+                "enabled-false": !el.payment_instrument_enabled
               })}
               title={t("Detail")}
               onClick={() => {
@@ -37,7 +38,10 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
               }}
             >
               <div
-                className={`PaymentMethod__state ${el.payment_instrument_status}`}
+                className={classNames({
+                  PaymentMethod__state: true,
+                  "status-active": el.payment_instrument_status === "ACTIVE"
+                })}
               ></div>
               <div>
                 <div>*{el.payment_instrument_hpan.slice(-5)}</div>
