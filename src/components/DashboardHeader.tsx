@@ -1,57 +1,65 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
+import { fromUnixTime } from "date-fns";
 import { getUserAgentApplication } from "../helpers/msal";
+import { useTranslation } from "react-i18next";
+import { logout } from "../helpers/logout";
 
-type Props = unknown;
-type DashboardHeaderState = {
-  loggedUser: string;
+type TokenProps = {
+  email: string;
+  exp: string;
+  family_name: string;
+  given_name: string;
 };
 
-export class DashboardHeader extends Component<Props, DashboardHeaderState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      loggedUser: ""
-    };
+const DashboardHeader: React.FunctionComponent<{}> = () => {
+  const { t } = useTranslation();
+  const [loggedUser, setLoggedUser] = useState<TokenProps>({
+    email: "",
+    exp: "",
+    family_name: "",
+    given_name: ""
+  });
+
+  function onSignOut(): void {
+    logout();
   }
-
-  public onSignOut = async () => {
-    const userAgentApplication = getUserAgentApplication();
-    sessionStorage.clear();
-    userAgentApplication.logout();
-  };
-
-  public componentDidMount = async () => {
+  useEffect(() => {
     const idToken = getUserAgentApplication().getAccount().idToken;
-    this.setState({
-      loggedUser: `${idToken.given_name} ${idToken.family_name} / ${idToken.emails[0]}`
+    const expDate = fromUnixTime(parseInt(idToken.exp, 10));
+    setLoggedUser({
+      email: idToken.emails[0],
+      exp: `${expDate.getHours()}:${expDate.getMinutes()}`,
+      family_name: idToken.family_name,
+      given_name: idToken.given_name
     });
-  };
+  }, []);
 
-  public render(): JSX.Element {
-    return (
-      <>
-        <nav className="navbar navbar-dark bg-dark justify-content-between">
-          <Link to="/" className="text-white">
-            PagoPA
-          </Link>
+  return (
+    <>
+      <nav className="navbar navbar-dark bg-dark justify-content-between">
+        <Link to="/" className="text-white">
+          PagoPA
+        </Link>
 
-          <div className=" d-flex align-items-center">
-            <div className="text-white small mr-3">{this.state.loggedUser}</div>
-            <div className="it-access-top-wrapper">
-              <Button
-                color="primary"
-                size="sm"
-                tag="button"
-                onClick={this.onSignOut}
-              >
-                Log-out
-              </Button>
-            </div>
+        <div className=" d-flex align-items-center">
+          <div className="text-white small mr-3">
+            {loggedUser.given_name} {loggedUser.family_name} /{" "}
+            {loggedUser.email} |{" "}
+            <b>
+              {t("Token until")} {loggedUser.exp}
+            </b>
           </div>
-        </nav>
-      </>
-    );
-  }
-}
+          <div className="it-access-top-wrapper">
+            <Button color="primary" size="sm" tag="button" onClick={onSignOut}>
+              Log-out
+            </Button>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default DashboardHeader;

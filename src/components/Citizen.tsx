@@ -10,6 +10,7 @@ import { toError } from "fp-ts/lib/Either";
 import { useTranslation } from "react-i18next";
 import { ILocation } from "../@types/location";
 import { getCitizenId, getUserToken } from "../helpers/coredata";
+import { logout } from "../helpers/logout";
 
 type Props = {
   location: ILocation;
@@ -56,6 +57,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
         }
         if (_.status === 401) {
           setResulterr(`401, ${t("Error 401")}`);
+          logout();
         }
         if (_.status === 404) {
           setResulterr(`404, ${t("Error 404")} "${getCitizenId()}"`);
