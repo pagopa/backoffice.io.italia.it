@@ -3,7 +3,7 @@ import FirstSearch from "./pages/FirstSearch";
 import Sheet from "./pages/Sheet";
 import { Login } from "./pages/Login";
 import { Logout } from "./pages/Logout";
-import { DashboardHeader } from "./components/DashboardHeader";
+import DashboardHeader from "./components/DashboardHeader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "typeface-titillium-web";
 import "typeface-roboto-mono";

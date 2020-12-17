@@ -42,7 +42,8 @@ const resources = {
       Enrollment: "Enrollment",
       Cancellation: "Cancellation",
       Enabled: "Enabled",
-      Channel: "Channel"
+      Channel: "Channel",
+      "Token until": "Authentication granted until "
     }
   },
   it: {
@@ -83,7 +84,8 @@ const resources = {
       Enrollment: "Iscrizione",
       Cancellation: "Cancellazione",
       Enabled: "Abilitazione",
-      Channel: "Canale di iscrizione"
+      Channel: "Canale di iscrizione",
+      "Token until": "Autenticazione valida fino alle"
     }
   }
 };
