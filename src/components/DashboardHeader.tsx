@@ -28,7 +28,7 @@ const DashboardHeader: React.FunctionComponent<{}> = () => {
   useEffect(() => {
     const idToken = getUserAgentApplication().getAccount().idToken;
     const expDate = fromUnixTime(parseInt(idToken.exp, 10));
-    setLoggeduser({
+    setLoggedUser({
       email: idToken.emails[0],
       exp: `${expDate.getHours()}:${expDate.getMinutes()}`,
       family_name: idToken.family_name,
