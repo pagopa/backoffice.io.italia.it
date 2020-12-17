@@ -1,25 +1,25 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import { format, parseISO, fromUnixTime } from "date-fns";
+import { fromUnixTime } from "date-fns";
 import { getUserAgentApplication } from "../helpers/msal";
 import { useTranslation } from "react-i18next";
 import { logout } from "../helpers/logout";
 
 type tokenProps = {
-  given_name: string;
-  family_name: string;
   email: string;
   exp: string;
+  family_name: string;
+  given_name: string;
 };
 
 const DashboardHeader: React.FunctionComponent<{}> = () => {
   const { t } = useTranslation();
   const [loggedUser, setLoggeduser] = useState<tokenProps>({
-    given_name: "",
-    family_name: "",
     email: "",
-    exp: ""
+    exp: "",
+    family_name: "",
+    given_name: ""
   });
 
   function onSignOut(): void {
@@ -27,12 +27,12 @@ const DashboardHeader: React.FunctionComponent<{}> = () => {
   }
   useEffect(() => {
     const idToken = getUserAgentApplication().getAccount().idToken;
-    const expDate = fromUnixTime(parseInt(idToken.exp));
+    const expDate = fromUnixTime(parseInt(idToken.exp, 10));
     setLoggeduser({
-      given_name: idToken.given_name,
-      family_name: idToken.family_name,
       email: idToken.emails[0],
-      exp: `${expDate.getHours()}:${expDate.getMinutes()}`
+      exp: `${expDate.getHours()}:${expDate.getMinutes()}`,
+      family_name: idToken.family_name,
+      given_name: idToken.given_name
     });
   }, []);
 
