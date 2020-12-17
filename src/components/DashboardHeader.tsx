@@ -6,7 +6,7 @@ import { getUserAgentApplication } from "../helpers/msal";
 import { useTranslation } from "react-i18next";
 import { logout } from "../helpers/logout";
 
-type tokenProps = {
+type TokenProps = {
   email: string;
   exp: string;
   family_name: string;
@@ -15,7 +15,7 @@ type tokenProps = {
 
 const DashboardHeader: React.FunctionComponent<{}> = () => {
   const { t } = useTranslation();
-  const [loggedUser, setLoggeduser] = useState<tokenProps>({
+  const [loggedUser, setLoggedUser] = useState<TokenProps>({
     email: "",
     exp: "",
     family_name: "",
