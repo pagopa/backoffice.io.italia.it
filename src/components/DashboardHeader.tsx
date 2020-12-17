@@ -1,9 +1,10 @@
 import React, { Component, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import { getUserAgentApplication } from "../helpers/msal";
 import { format, parseISO, fromUnixTime } from "date-fns";
+import { getUserAgentApplication } from "../helpers/msal";
 import { useTranslation } from "react-i18next";
+import { logout } from "../helpers/logout";
 
 type tokenProps = {
   given_name: string;
@@ -22,14 +23,11 @@ const DashboardHeader: React.FunctionComponent<{}> = () => {
   });
 
   function onSignOut(): void {
-    const userAgentApplication = getUserAgentApplication();
-    sessionStorage.clear();
-    userAgentApplication.logout();
+    logout();
   }
   useEffect(() => {
     const idToken = getUserAgentApplication().getAccount().idToken;
     const expDate = fromUnixTime(parseInt(idToken.exp));
-    console.log(idToken);
     setLoggeduser({
       given_name: idToken.given_name,
       family_name: idToken.family_name,
