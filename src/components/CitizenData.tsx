@@ -29,7 +29,7 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
       <div className="d-flex align-items-center">
         <h1
           className={classNames({
-            cancelled: !props.resultData.enabled
+            "enabled-false": !props.resultData.enabled
           })}
         >
           {t("Citizen profile")}
@@ -51,19 +51,28 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
       </div>
       <div className="row">
         <div className="col-md-8">
-          <div className="row mt-2">
-            <div className="col-md-3 font-weight-bold">{t("Fiscal code")}</div>
-            <div className="col-md-9">{props.resultData.fiscal_code}</div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-md-3 font-weight-bold">
-              {t("On-boarding date")}
+          <div
+            className={classNames({
+              "enabled-false": !props.resultData.enabled
+            })}
+          >
+            <div className="row mt-2">
+              <div className="col-md-3 font-weight-bold">
+                {t("Fiscal code")}
+              </div>
+              <div className="col-md-9">{props.resultData.fiscal_code}</div>
             </div>
-            <div className="col-md-3">
-              {format(
-                parseISO(props.resultData.timestamp_tc),
-                "dd/MM/yyyy HH:mm"
-              )}
+
+            <div className="row mt-2">
+              <div className="col-md-3 font-weight-bold">
+                {t("On-boarding date")}
+              </div>
+              <div className="col-md-3">
+                {format(
+                  parseISO(props.resultData.timestamp_tc),
+                  "dd/MM/yyyy HH:mm"
+                )}
+              </div>
             </div>
             {props.resultData.cancellation && (
               <>
@@ -111,7 +120,6 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
               </ul>
             </div>
           </div>
-
           {props.resultData.payment_methods.length > 0 && (
             <Paymethods paylist={props.resultData.payment_methods} />
           )}

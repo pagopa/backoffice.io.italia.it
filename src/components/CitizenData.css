@@ -1,3 +1,6 @@
-h1.cancelled {
+.enabled-false {
     text-decoration: line-through;
+}
+.disabled-line-through {
+    text-decoration: auto;
 }
