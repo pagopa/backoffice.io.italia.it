@@ -67,11 +67,12 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
               <div className="col-md-3 font-weight-bold">
                 {t("On-boarding date")}
               </div>
-            <div className="col-md-3">
-              {format(
-                parseISO(props.resultData.timestamp_tc),
-                "dd/MM/yyyy HH:mm"
-              )}
+              <div className="col-md-3">
+                {format(
+                  parseISO(props.resultData.timestamp_tc),
+                  "dd/MM/yyyy HH:mm"
+                )}
+              </div>
             </div>
             {props.resultData.cancellation && (
               <>
@@ -119,7 +120,6 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
               </ul>
             </div>
           </div>
-
           {props.resultData.payment_methods.length > 0 && (
             <Paymethods paylist={props.resultData.payment_methods} />
           )}
