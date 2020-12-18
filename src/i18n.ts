@@ -43,7 +43,10 @@ const resources = {
       Cancellation: "Cancellation",
       Enabled: "Enabled",
       Channel: "Channel",
-      "Token until": "Authentication granted until "
+      "Token until": "Authentication granted until ",
+      Name: "Name",
+      Surname: "Surname",
+      "Cancellation Date": "Cancellation Date"
     }
   },
   it: {
@@ -85,7 +88,10 @@ const resources = {
       Cancellation: "Cancellazione",
       Enabled: "Abilitazione",
       Channel: "Canale di iscrizione",
-      "Token until": "Autenticazione valida fino alle"
+      "Token until": "Autenticazione valida fino alle",
+      Name: "Nome",
+      Surname: "Cognome",
+      "Cancellation Date": "Data cancellazione"
     }
   }
 };
