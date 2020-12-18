@@ -59,12 +59,25 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
             <div className="col-md-3 font-weight-bold">
               {t("On-boarding date")}
             </div>
-            <div className="col-md-9">
+            <div className="col-md-3">
               {format(
                 parseISO(props.resultData.timestamp_tc),
                 "dd/MM/yyyy HH:mm"
               )}
             </div>
+            {props.resultData.cancellation && (
+              <>
+                <div className="col-md-3 font-weight-bold bg-warning">
+                  {t("Cancellation Date")}
+                </div>
+                <div className="col-md-3 bg-warning">
+                  {format(
+                    parseISO(props.resultData.cancellation),
+                    "dd/MM/yyyy HH:mm"
+                  )}
+                </div>
+              </>
+            )}
           </div>
           {props.resultData.payoff_instr && (
             <div className="row mt-2">
@@ -75,6 +88,29 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
               </div>
             </div>
           )}
+          <div className="row mt-2">
+            <div className="col-md-3 font-weight-bold">Check-IBAN</div>
+            <div className="col-md-9">
+              <ul className="list-unstyled">
+                <li>
+                  <b>{t("State")}: </b>
+                  {props.resultData.checkiban_status}
+                </li>
+                <li>
+                  <b>{t("Name")}: </b>
+                  {props.resultData.checkiban_name}
+                </li>
+                <li>
+                  <b>{t("Surname")}: </b>
+                  {props.resultData.checkiban_surname}
+                </li>
+                <li>
+                  <b>{t("Fiscal code")}: </b>
+                  {props.resultData.checkiban_fiscal_code}
+                </li>
+              </ul>
+            </div>
+          </div>
 
           {props.resultData.payment_methods.length > 0 && (
             <Paymethods paylist={props.resultData.payment_methods} />
