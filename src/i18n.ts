@@ -46,7 +46,8 @@ const resources = {
       "Token until": "Authentication granted until ",
       Name: "Name",
       Surname: "Surname",
-      "Cancellation Date": "Cancellation Date"
+      "Cancellation Date": "Cancellation Date",
+      Elab: "Elab."
     }
   },
   it: {
@@ -91,7 +92,8 @@ const resources = {
       "Token until": "Autenticazione valida fino alle",
       Name: "Nome",
       Surname: "Cognome",
-      "Cancellation Date": "Data cancellazione"
+      "Cancellation Date": "Data cancellazione",
+      Elab: "Elab."
     }
   }
 };
