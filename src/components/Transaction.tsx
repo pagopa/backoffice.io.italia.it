@@ -30,12 +30,20 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
       <div className="col-sm-2">
         {format(parseISO(props.el.trx_timestamp), "dd/MM/yyyy HH:mm")}
       </div>
-      <div className="col-sm-3 ">{props.el.acquirer_descr}</div>
+      <div className="col-sm-2 ">{props.el.acquirer_descr}</div>
       <div className="col-sm-2 ">{props.el.circuit_type_descr}</div>
       <div className="col-sm-2 ">
         {props.el.amount} <small>{props.el.amount_currency_descr}</small>
       </div>
       <div className="col-sm-2 ">*{props.el.hpan.slice(-5)}</div>
+      <div
+        className={classNames({
+          "col-sm-1": true,
+          elab: !props.el.elab_ranking
+        })}
+      >
+        {props.el.elab_ranking ? t("Yes") : t("No")}
+      </div>
       <div className="col-sm-1 p-0">
         <img
           className="viewIcon"

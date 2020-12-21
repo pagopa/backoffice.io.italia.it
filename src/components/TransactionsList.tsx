@@ -89,7 +89,7 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
       <div className="mt-3">
         <div className="row border-bottom border-dark py-2">
           <div className="col-sm-2 font-weight-bold">{t("Datetime")}</div>
-          <div className="col-sm-3 font-weight-bold">{t("Acquirer")}</div>
+          <div className="col-sm-2 font-weight-bold">{t("Acquirer")}</div>
           <div className="col-sm-2 font-weight-bold">{t("Circuit name")}</div>
           <div className="col-sm-2 font-weight-bold">{t("Amount")}</div>
           <div className="col-sm-2 font-weight-bold">
@@ -100,6 +100,7 @@ export const TransactionsList: React.FunctionComponent<Props> = props => {
               ></SelectPayMethods>
             )}
           </div>
+          <div className="col-sm-1 font-weight-bold">{t("Elab")}</div>
           <div className="col-sm-1 font-weight-bold"></div>
         </div>
         {resultData &&
