@@ -11,9 +11,11 @@ import { useTranslation } from "react-i18next";
 import { ILocation } from "../@types/location";
 import { getCitizenId, getUserToken } from "../helpers/coredata";
 import { logout } from "../helpers/logout";
+import { PaymentMethod } from "../../generated/definitions/PaymentMethod";
 
 type Props = {
   location: ILocation;
+  setCitPayMethods: (arg: ReadonlyArray<PaymentMethod>) => void;
 };
 
 export const Citizen: React.FunctionComponent<Props> = props => {
@@ -51,6 +53,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
       .map(_ => {
         if (_.status === 200) {
           setResultdata(_.value);
+          props.setCitPayMethods(_.value.payment_methods);
         }
         if (_.status === 400) {
           setResulterr(`400, ${t("Error 400")} "${getCitizenId()}"`);
