@@ -32,7 +32,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
       </div>
       <div className="col-sm-2 ">{props.el.acquirer_descr}</div>
       <div className="col-sm-2 ">{props.el.circuit_type_descr}</div>
-      <div className="col-sm-2 ">
+      <div className="col-sm-1 ">
         {props.el.amount} <small>{props.el.amount_currency_descr}</small>
       </div>
       <div className="col-sm-2 ">*{props.el.hpan.slice(-5)}</div>
@@ -43,6 +43,14 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
         })}
       >
         {props.el.elab_ranking ? t("Yes") : t("No")}
+      </div>
+      <div
+        className={classNames({
+          "col-sm-1": true,
+          revert: props.el.operation_type === "01"
+        })}
+      >
+        {props.el.operation_type === "01" ? t("Yes") : t("No")}
       </div>
       <div className="col-sm-1 p-0">
         <img

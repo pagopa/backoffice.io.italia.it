@@ -48,7 +48,8 @@ const resources = {
       Name: "Name",
       Surname: "Surname",
       "Cancellation Date": "Cancellation Date",
-      Elab: "Elab."
+      Elab: "Elab.",
+      Revert: "Revert"
     }
   },
   it: {
@@ -95,7 +96,8 @@ const resources = {
       Name: "Nome",
       Surname: "Cognome",
       "Cancellation Date": "Data cancellazione",
-      Elab: "Elab."
+      Elab: "Elab.",
+      Revert: "Storno"
     }
   }
 };
