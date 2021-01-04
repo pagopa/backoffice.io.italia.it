@@ -49,7 +49,16 @@ const resources = {
       Surname: "Surname",
       "Cancellation Date": "Cancellation Date",
       Elab: "Elab.",
-      Revert: "Revert"
+      Revert: "Revert",
+      Award: "Award",
+      Refound: "Refound",
+      Cashback: "Cashback",
+      Transactions: "Transactions",
+      Ranking: "Ranking",
+      "Start date": "Start date",
+      "End date": "End date",
+      IBAN: "IBAN"
+
     }
   },
   it: {
@@ -97,7 +106,15 @@ const resources = {
       Surname: "Cognome",
       "Cancellation Date": "Data cancellazione",
       Elab: "Elab.",
-      Revert: "Storno"
+      Revert: "Storno",
+      Award: "Award",
+      Refound: "Rimborso",
+      Cashback: "Cashback",
+      Transactions: "Transazioni",
+      Ranking: "Classifica",
+      "Start date": "Data inizio",
+      "End date": "Data fine",
+      IBAN: "IBAN"
     }
   }
 };

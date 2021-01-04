@@ -7,8 +7,11 @@ import { RawModal } from "./RawModal";
 import classNames from "classnames";
 import { getCitizenId } from "../helpers/coredata";
 import "./CitizenData.css";
+import { Awards } from "./Awards";
+import { ILocation } from "../@types/location";
 
 type CitizenDataProps = {
+  location: ILocation;
   resultData: BPDCitizen;
 };
 
@@ -124,7 +127,9 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
             <Paymethods paylist={props.resultData.payment_methods} />
           )}
         </div>
-        <div className="col-md-4"></div>
+        <div className="col-md-4">
+          <Awards {...props}></Awards>
+        </div>
       </div>
     </>
   );
