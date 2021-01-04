@@ -21,6 +21,9 @@
 .TransactionsList__row .elab {
     background-color: #f8f40f !important;
 }
+.TransactionsList__row .revert {
+    background-color: #9ff80f !important;
+}
 
 .viewIcon {
     height: 30px;
