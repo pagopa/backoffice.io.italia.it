@@ -5,6 +5,7 @@ import { format, parseISO } from "date-fns";
 import { fromNullable } from "fp-ts/lib/Option";
 import viewIcon from "../assets/view.svg";
 import classNames from "classnames";
+import { Operation_type_descrEnum as OperationType } from "../../generated/definitions/BPDTransaction";
 
 type TransactionProps = {
   el: BPDTransaction;
@@ -47,10 +48,12 @@ export const Transaction: React.FunctionComponent<TransactionProps> = props => {
       <div
         className={classNames({
           "col-sm-1": true,
-          revert: props.el.operation_type === "01"
+          revert: props.el.operation_type_descr === OperationType.Transfer
         })}
       >
-        {props.el.operation_type === "01" ? t("Yes") : t("No")}
+        {props.el.operation_type_descr === OperationType.Transfer
+          ? t("Yes")
+          : t("No")}
       </div>
       <div className="col-sm-1 p-0">
         <img
