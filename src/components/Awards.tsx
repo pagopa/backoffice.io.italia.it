@@ -11,6 +11,7 @@ import { toError } from "fp-ts/lib/Either";
 import { RawModal } from "./RawModal";
 import { Award } from "./Award";
 import { AwardPeriod } from "../../generated/definitions/AwardPeriod";
+import { useTranslation } from "react-i18next";
 
 type AwardsDataProps = {
   location: ILocation;
@@ -23,6 +24,7 @@ export const Awards: React.FunctionComponent<AwardsDataProps> = props => {
   const [resultErr, setResulterr] = useState<string>("");
   const [modalContent, setModalcontent] = useState<string>("");
   const [modalState, setModalstate] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     tryCatch(
@@ -67,8 +69,8 @@ export const Awards: React.FunctionComponent<AwardsDataProps> = props => {
     <div className="border rounded shadow p-3 awards">
       <RawModal state={modalState} jsonobj={modalContent} />
 
-      <h3>Awards</h3>
-
+      <h3>{t("Awards")}</h3>
+      {resultErr && <b>{resultErr}</b>}
       {resultData &&
         resultData.awards.map((el: AwardPeriod, index: number) => (
           <Award el={el} index={index} key={index} popModal={popModal} />

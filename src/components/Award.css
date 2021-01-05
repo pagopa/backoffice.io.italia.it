@@ -1,0 +1,12 @@
+.awards__item {
+    border-bottom: 1px dotted #ccc;
+}
+.awards__item__body {
+    display: none;
+}
+.awards__item__body.active {
+    display: block;
+}
+.viewIcon.active {
+    opacity: 0.5;
+}

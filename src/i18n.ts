@@ -50,6 +50,7 @@ const resources = {
       "Cancellation Date": "Cancellation Date",
       Elab: "Elab.",
       Revert: "Revert",
+      Awards: "Award",
       Award: "Award",
       Refound: "Refound",
       Cashback: "Cashback",
@@ -57,8 +58,8 @@ const resources = {
       Ranking: "Ranking",
       "Start date": "Start date",
       "End date": "End date",
-      IBAN: "IBAN"
-
+      IBAN: "IBAN",
+      Grace: "Grace"
     }
   },
   it: {
@@ -107,14 +108,16 @@ const resources = {
       "Cancellation Date": "Data cancellazione",
       Elab: "Elab.",
       Revert: "Storno",
-      Award: "Award",
+      Award: "Periodo",
+      Awards: "Periodi",
       Refound: "Rimborso",
       Cashback: "Cashback",
       Transactions: "Transazioni",
       Ranking: "Classifica",
       "Start date": "Data inizio",
       "End date": "Data fine",
-      IBAN: "IBAN"
+      IBAN: "IBAN",
+      Grace: "Tolleranza"
     }
   }
 };
