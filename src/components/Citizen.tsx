@@ -14,7 +14,7 @@ import { logout } from "../helpers/logout";
 import { PaymentMethod } from "../../generated/definitions/PaymentMethod";
 import { FiscalCode } from "../../generated/definitions/FiscalCode";
 import { format, fromUnixTime } from "date-fns";
-import * as jwt from "jsonwebtoken";
+import { decode } from "jsonwebtoken";
 
 type Props = {
   location: ILocation;
@@ -71,7 +71,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
               `403, ${t("Error 403 authorization")} "${getCitizenId()}"`
             );
           } else {
-            const payload = jwt.decode(getCitizenId());
+            const payload = decode(getCitizenId());
             payload && typeof payload !== "string" && payload.exp
               ? setResulterr(
                   `403, ${t("Error 403 token")} [exp: ${format(
