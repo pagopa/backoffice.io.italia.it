@@ -12,6 +12,9 @@ import { ILocation } from "../@types/location";
 import { getCitizenId, getUserToken } from "../helpers/coredata";
 import { logout } from "../helpers/logout";
 import { PaymentMethod } from "../../generated/definitions/PaymentMethod";
+import { FiscalCode } from "../../generated/definitions/FiscalCode";
+import { format, fromUnixTime } from "date-fns";
+import { decode } from "jsonwebtoken";
 
 type Props = {
   location: ILocation;
@@ -61,6 +64,25 @@ export const Citizen: React.FunctionComponent<Props> = props => {
         if (_.status === 401) {
           setResulterr(`401, ${t("Error 401")}`);
           logout();
+        }
+        if (_.status === 403) {
+          if (FiscalCode.is(getCitizenId())) {
+            setResulterr(
+              `403, ${t("Error 403 authorization")} "${getCitizenId()}"`
+            );
+          } else {
+            const payload = decode(getCitizenId());
+            payload && typeof payload !== "string" && payload.exp
+              ? setResulterr(
+                  `403, ${t("Error 403 token")} [exp: ${format(
+                    fromUnixTime(payload.exp),
+                    "dd-MM-yyyy HH:mm:ss OOOO"
+                  )}] "${getCitizenId()}"`
+                )
+              : setResulterr(
+                  `403, ${t("Error 403 token")} "${getCitizenId()}"`
+                );
+          }
         }
         if (_.status === 404) {
           setResulterr(`404, ${t("Error 404")} "${getCitizenId()}"`);
