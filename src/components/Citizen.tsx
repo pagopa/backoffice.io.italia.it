@@ -13,6 +13,8 @@ import { getCitizenId, getUserToken } from "../helpers/coredata";
 import { logout } from "../helpers/logout";
 import { PaymentMethod } from "../../generated/definitions/PaymentMethod";
 import { FiscalCode } from "../../generated/definitions/FiscalCode";
+import { format, fromUnixTime } from "date-fns";
+import * as jwt from "jsonwebtoken";
 
 type Props = {
   location: ILocation;
@@ -69,7 +71,17 @@ export const Citizen: React.FunctionComponent<Props> = props => {
               `403, ${t("Error 403 authorization")} "${getCitizenId()}"`
             );
           } else {
-            setResulterr(`403, ${t("Error 403 token")} "${getCitizenId()}"`);
+            const payload = jwt.decode(getCitizenId());
+            payload && typeof payload !== "string" && payload.exp
+              ? setResulterr(
+                  `403, ${t("Error 403 token")} [exp: ${format(
+                    fromUnixTime(payload.exp),
+                    "dd-MM-yyyy HH:mm:ss OOOO"
+                  )}] "${getCitizenId()}"`
+                )
+              : setResulterr(
+                  `403, ${t("Error 403 token")} "${getCitizenId()}"`
+                );
           }
         }
         if (_.status === 404) {
