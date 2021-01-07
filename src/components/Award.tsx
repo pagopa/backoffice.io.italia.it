@@ -8,8 +8,6 @@ import "./Award.css";
 
 type AwardProps = {
   el: AwardPeriod;
-  index: number;
-  key?: number;
   popModal: (el: AwardPeriod) => void;
 };
 
@@ -18,7 +16,7 @@ export const Award: React.FunctionComponent<AwardProps> = props => {
   const { t } = useTranslation();
 
   return (
-    <div className="awards__item mb-2" key={props.el.award_period_id}>
+    <div className="awards__item mb-2">
       <div className="awards__item__title">
         <h5 className="text-primary">
           {t("Award")} {props.el.award_period_id}

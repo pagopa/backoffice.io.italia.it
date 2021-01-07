@@ -73,7 +73,7 @@ export const Awards: React.FunctionComponent<AwardsDataProps> = props => {
       {resultErr && <b>{resultErr}</b>}
       {resultData &&
         resultData.awards.map((el: AwardPeriod, index: number) => (
-          <Award el={el} index={index} key={index} popModal={popModal} />
+          <Award el={el} key={index} popModal={popModal} />
         ))}
     </div>
   );
