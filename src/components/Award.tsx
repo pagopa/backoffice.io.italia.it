@@ -8,10 +8,13 @@ import "./Award.css";
 
 type AwardProps = {
   el: AwardPeriod;
-  popModal: (el: AwardPeriod) => void;
+  popModal: (elToShowInModal: AwardPeriod) => void;
 };
 
-export const Award: React.FunctionComponent<AwardProps> = props => {
+export const Award: React.FunctionComponent<AwardProps> = ({
+  el,
+  popModal
+}) => {
   const [activeClass, setActiveclass] = useState<boolean>(false);
   const { t } = useTranslation();
 
@@ -19,7 +22,7 @@ export const Award: React.FunctionComponent<AwardProps> = props => {
     <div className="awards__item mb-2">
       <div className="awards__item__title">
         <h5 className="text-primary">
-          {t("Award")} {props.el.award_period_id}
+          {t("Award")} {el.award_period_id}
           <div className="float-right">
             <img
               className={classNames({
@@ -34,7 +37,7 @@ export const Award: React.FunctionComponent<AwardProps> = props => {
             <span
               className="badge badge-primary cursor-pointer"
               onClick={() => {
-                props.popModal(props.el);
+                popModal(el);
               }}
             >
               RAW
@@ -51,62 +54,62 @@ export const Award: React.FunctionComponent<AwardProps> = props => {
         <div className="row">
           <div className="col-sm-6">
             <b className="d-block">{t("Refound")}</b>
-            {props.el.award_winner_amount} &euro;
+            {el.award_winner_amount} &euro;
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Cashback")}</b>
-            {props.el.citizen_ranking_cashback} &euro;
+            {el.citizen_ranking_cashback} &euro;
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Transactions")}</b>
-            {props.el.citizen_ranking_transaction}
+            {el.citizen_ranking_transaction}
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Ranking")}</b>
-            {props.el.citizen_ranking_ranking}
+            {el.citizen_ranking_ranking}
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Start date")}</b>
-            {props.el.award_period_start &&
-              format(parseISO(props.el.award_period_start), "dd/MM/yyyy")}
+            {el.award_period_start &&
+              format(parseISO(el.award_period_start), "dd/MM/yyyy")}
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("End date")}</b>
-            {props.el.award_period_end &&
-              format(parseISO(props.el.award_period_end), "dd/MM/yyyy")}
+            {el.award_period_end &&
+              format(parseISO(el.award_period_end), "dd/MM/yyyy")}
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Update date")}</b>
-            {props.el.citizen_ranking_ranking_date &&
+            {el.citizen_ranking_ranking_date &&
               format(
-                parseISO(props.el.citizen_ranking_ranking_date),
+                parseISO(el.citizen_ranking_ranking_date),
                 "dd/MM/yyyy HH:mm"
               )}
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Grace")}</b>
-            {props.el.award_period_grace_period}
+            {el.award_period_grace_period}
           </div>
           <div className="col-sm-12 text-break">
             <b className="d-block">CheckIBAN</b>
             <ul className="list-unstyled m-0 pl-2">
               <li>
                 <i>{t("Name")}: </i>
-                {props.el.award_winner_account_holder_name}
+                {el.award_winner_account_holder_name}
               </li>
               <li>
                 <i>{t("Surname")}: </i>
-                {props.el.award_winner_account_holder_surname}
+                {el.award_winner_account_holder_surname}
               </li>
               <li>
                 <i>{t("Status")}: </i>
-                {props.el.award_winner_check_instr_status}
+                {el.award_winner_check_instr_status}
               </li>
             </ul>
           </div>
           <div className="col-sm-12 text-break">
             <b className="d-block">{t("IBAN")}</b>
-            {props.el.award_winner_payoff_instr}
+            {el.award_winner_payoff_instr}
           </div>
         </div>
       </div>
