@@ -61,7 +61,8 @@ const resources = {
       "Start date": "Start date",
       "End date": "End date",
       IBAN: "IBAN",
-      Grace: "Grace"
+      Grace: "Grace",
+      Revert: "Revert"
     }
   },
   it: {
@@ -121,7 +122,8 @@ const resources = {
       "Start date": "Data inizio",
       "End date": "Data fine",
       IBAN: "IBAN",
-      Grace: "Tolleranza"
+      Grace: "Tolleranza",
+      Revert: "Storno"
     }
   }
 };
