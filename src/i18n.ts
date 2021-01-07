@@ -18,6 +18,9 @@ const resources = {
       "Update date": "Update date",
       "Error 400": "Invalid string",
       "Error 401": "Authentication problem",
+      "Error 403 token": "Support token is invalid or expired",
+      "Error 403 authorization":
+        "You do not have enough permission to complete the operation",
       "Error 404": "No match found with",
       "Error 500": "Generic error",
       Detail: "See detail",
@@ -75,6 +78,9 @@ const resources = {
       "Update date": "Data aggiornamento",
       "Error 400": "Stringa di ricerca non valida",
       "Error 401": "Token di autenticazione non valido",
+      "Error 403 token": "Support token invalido o scaduto",
+      "Error 403 authorization":
+        "Non hai sufficienti permessi per completare l'operazione",
       "Error 404": "Nessuna corrispondenza trovata con il codice",
       "Error 500": "Errore generico",
       Detail: "Visualizza dettaglio",
