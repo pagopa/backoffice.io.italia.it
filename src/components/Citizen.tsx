@@ -100,7 +100,7 @@ export const Citizen: React.FunctionComponent<Props> = props => {
   return (
     <>
       {resultData ? (
-        <CitizenData resultData={resultData} />
+        <CitizenData {...props} resultData={resultData} />
       ) : (
         <h2>Error: {resultErr}</h2>
       )}

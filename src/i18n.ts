@@ -52,6 +52,16 @@ const resources = {
       Surname: "Surname",
       "Cancellation Date": "Cancellation Date",
       Elab: "Elab.",
+      Awards: "Award",
+      Award: "Award",
+      Refound: "Refound",
+      Cashback: "Cashback",
+      Transactions: "Transactions",
+      Ranking: "Ranking",
+      "Start date": "Start date",
+      "End date": "End date",
+      IBAN: "IBAN",
+      Grace: "Grace",
       Revert: "Revert"
     }
   },
@@ -103,6 +113,16 @@ const resources = {
       Surname: "Cognome",
       "Cancellation Date": "Data cancellazione",
       Elab: "Elab.",
+      Awards: "Periodi",
+      Award: "Periodo",
+      Refound: "Rimborso",
+      Cashback: "Cashback",
+      Transactions: "Transazioni",
+      Ranking: "Classifica",
+      "Start date": "Data inizio",
+      "End date": "Data fine",
+      IBAN: "IBAN",
+      Grace: "Tolleranza",
       Revert: "Storno"
     }
   }
