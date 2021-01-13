@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AwardPeriod } from "../../generated/definitions/AwardPeriod";
 import { useTranslation } from "react-i18next";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isPast } from "date-fns";
 import viewIcon from "../assets/view.svg";
 import classNames from "classnames";
 import "./Award.css";
@@ -17,6 +17,10 @@ export const Award: React.FunctionComponent<AwardProps> = ({
 }) => {
   const [activeClass, setActiveclass] = useState<boolean>(false);
   const { t } = useTranslation();
+
+  function isAwardExpired(endDate: string): boolean {
+    return isPast(parseISO(endDate));
+  }
 
   return (
     <div className="awards__item mb-2">
@@ -54,7 +58,8 @@ export const Award: React.FunctionComponent<AwardProps> = ({
         <div className="row">
           <div className="col-sm-6">
             <b className="d-block">{t("Refound")}</b>
-            {el.award_winner_amount} &euro;
+            {isAwardExpired(el.award_period_end) &&
+              `${el.award_winner_amount} €`}
           </div>
           <div className="col-sm-6">
             <b className="d-block">{t("Cashback")}</b>
