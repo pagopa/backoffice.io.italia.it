@@ -10,9 +10,7 @@ type Props = {
 };
 
 const Sheet = (props: Props) => {
-  const [citPayMethods, setCitPayMethods] = useState<
-    ReadonlyArray<PaymentMethod>
-  >([]);
+  const [, setCitPayMethods] = useState<ReadonlyArray<PaymentMethod>>([]);
 
   useEffect(() => {
     if (props.location.state) {

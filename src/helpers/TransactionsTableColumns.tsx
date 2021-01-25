@@ -9,7 +9,8 @@ import {
 import viewIcon from "../assets/view.svg";
 import { CellProps, Column } from "react-table";
 
-export const TransactionsTableColumns = (): Array<Column<BPDTransaction>> => {
+// tslint:disable-next-line readonly-array
+export const TransactionsTableColumns = (): Column<BPDTransaction>[] => {
   const { t } = useTranslation();
   return [
     {
