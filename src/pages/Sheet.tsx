@@ -27,7 +27,7 @@ const Sheet = (props: Props) => {
 
       <hr />
 
-      <TransactionsList {...props} citPayMethods={citPayMethods} />
+      <TransactionsList {...props} />
     </>
   );
 };

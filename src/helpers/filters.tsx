@@ -1,12 +1,12 @@
 import React from "react";
 import { Input, CustomInput } from "reactstrap";
 import { useTranslation } from "react-i18next";
+import { FilterProps } from "react-table";
+import { BPDTransaction } from "../../generated/definitions/BPDTransaction";
 
-export const Filter = ({ column }) => {
-  return <div>{column.canFilter && column.render("Filter")}</div>;
-};
-
-export const DefaultColumnFilter = ({ column: { filterValue, setFilter } }) => {
+export const DefaultColumnFilter = ({
+  column: { filterValue, setFilter }
+}: FilterProps<BPDTransaction>) => {
   const { t } = useTranslation();
   return (
     <Input
@@ -21,9 +21,9 @@ export const DefaultColumnFilter = ({ column: { filterValue, setFilter } }) => {
 
 export const SelectHpanFilter = ({
   column: { filterValue, setFilter, preFilteredRows }
-}) => {
+}: FilterProps<BPDTransaction>) => {
   const options = React.useMemo(() => {
-    const optionsSet = new Set();
+    const optionsSet = new Set<string>();
     preFilteredRows.forEach(row => {
       optionsSet.add(row.values.hpan);
     });
@@ -51,9 +51,9 @@ export const SelectHpanFilter = ({
 };
 export const SelectColumnFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id }
-}) => {
+}: FilterProps<BPDTransaction>) => {
   const options = React.useMemo(() => {
-    const optionsSet = new Set();
+    const optionsSet = new Set<string>();
     preFilteredRows.forEach(row => {
       optionsSet.add(row.values[id]);
     });
