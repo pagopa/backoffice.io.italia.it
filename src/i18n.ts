@@ -37,7 +37,7 @@ const resources = {
       "Issuer transaction ID": "# Issuer trans.",
       "Operation type": "Operation type",
       Score: "Score",
-      "Cashback period": "Cashback period",
+      "Cashback period": "Period",
       Close: "Close",
       Cancelled: "Cancelled",
       Yes: "Yes",
@@ -62,7 +62,9 @@ const resources = {
       "End date": "End date",
       IBAN: "IBAN",
       Grace: "Grace",
-      Revert: "Revert"
+      Revert: "Revert",
+      Search: "Search",
+      TransactionTableDesc: "Click the column's name to sort data"
     }
   },
   it: {
@@ -98,7 +100,7 @@ const resources = {
       "Issuer transaction ID": "# trans. issuer",
       "Operation type": "Tipo operazione",
       Score: "Punti",
-      "Cashback period": "Periodo cashback",
+      "Cashback period": "Periodo",
       Close: "Chiudi",
       Cancelled: "Cancellato",
       Yes: "Sì",
@@ -123,7 +125,9 @@ const resources = {
       "End date": "Data fine",
       IBAN: "IBAN",
       Grace: "Tolleranza",
-      Revert: "Storno"
+      Revert: "Storno",
+      Search: "Cerca",
+      TransactionTableDesc: "Clicca sul nome della colonna per ordinare i dati"
     }
   }
 };

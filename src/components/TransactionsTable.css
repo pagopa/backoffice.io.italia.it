@@ -1,0 +1,16 @@
+table.TransactionTable thead th {
+    vertical-align: top;
+}
+table.TransactionTable tbody tr:hover {
+    background-color: aliceblue;
+}
+table.TransactionTable tbody tr.cancelled {
+    text-decoration: line-through;
+    color: #aaaaaa;
+}
+.elab {
+    background-color: #f8f40f !important;
+}
+.revert {
+    background-color: #9ff80f !important;
+}
