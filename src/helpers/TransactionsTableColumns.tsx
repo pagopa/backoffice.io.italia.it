@@ -2,32 +2,37 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { SelectColumnFilter, SelectHpanFilter } from "./filters";
 import { format, parseISO } from "date-fns";
-import { Operation_type_descrEnum as OperationType } from "../../generated/definitions/BPDTransaction";
+import {
+  BPDTransaction,
+  Operation_type_descrEnum as OperationType
+} from "../../generated/definitions/BPDTransaction";
 import viewIcon from "../assets/view.svg";
+import { CellProps, Column } from "react-table";
 
-export const TransactionsTableColumns = () => {
+// tslint:disable-next-line readonly-array
+export const TransactionsTableColumns = (): Column<BPDTransaction>[] => {
   const { t } = useTranslation();
   return [
     {
-      Cell: props => {
-        return format(parseISO(props.value), "dd/MM/yyyy HH:mm");
+      Cell: ({ value }: CellProps<BPDTransaction>) => {
+        return format(parseISO(value), "dd/MM/yyyy HH:mm");
       },
-      Header: t("Datetime"),
+      Header: t("Datetime") || "",
       accessor: "trx_timestamp",
       disableFilters: true
     },
     {
-      Header: t("Acquirer"),
+      Header: t("Acquirer") || "",
       accessor: "acquirer_descr",
       disableFilters: true
     },
     {
-      Header: t("Circuit name"),
+      Header: t("Circuit name") || "",
       accessor: "circuit_type_descr",
       disableFilters: true
     },
     {
-      Cell: ({ row }) => {
+      Cell: ({ row }: CellProps<BPDTransaction>) => {
         return (
           <>
             {row.values.amount}{" "}
@@ -35,35 +40,35 @@ export const TransactionsTableColumns = () => {
           </>
         );
       },
-      Header: t("Amount"),
+      Header: t("Amount") || "",
       accessor: "amount",
       disableFilters: true
     },
     {
-      Cell: props => {
-        return props.value.slice(-5);
+      Cell: ({ value }: CellProps<BPDTransaction>) => {
+        return value.slice(-5);
       },
       Filter: SelectHpanFilter,
-      Header: t("HPAN"),
+      Header: t("HPAN") || "",
       accessor: "hpan",
       disableSortBy: true,
       filter: "equals"
     },
     {
-      Cell: ({ row }) => {
+      Cell: ({ row }: CellProps<BPDTransaction>) => {
         return row.values.elab_ranking ? (
           t("Yes")
         ) : (
           <span className="elab">{t("No")}</span>
         );
       },
-      Header: t("Elab"),
+      Header: t("Elab") || "",
       accessor: "elab_ranking",
       disableFilters: true,
       disableSortBy: true
     },
     {
-      Cell: ({ row }) => {
+      Cell: ({ row }: CellProps<BPDTransaction>) => {
         {
           return row.values.operation_type_descr === OperationType.Transfer ? (
             <span className="revert">{t("Yes")}</span>
@@ -72,20 +77,20 @@ export const TransactionsTableColumns = () => {
           );
         }
       },
-      Header: t("Revert"),
+      Header: t("Revert") || "",
       accessor: "operation_type_descr",
       disableFilters: true,
       disableSortBy: true
     },
     {
       Filter: SelectColumnFilter,
-      Header: t("Cashback period"),
+      Header: t("Cashback period") || "",
       accessor: "award_period_id",
       disableSortBy: true,
       filter: "equals"
     },
     {
-      Cell: ({ row }) => (
+      Cell: ({ row }: CellProps<BPDTransaction>) => (
         <>
           <img
             className="viewIcon float-right"

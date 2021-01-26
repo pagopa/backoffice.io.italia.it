@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import { format, parseISO } from "date-fns";
 import { fromNullable } from "fp-ts/lib/Option";
 import classNames from "classnames";
-import { Filter, DefaultColumnFilter } from "../helpers/filters";
+import { DefaultColumnFilter } from "../helpers/filters";
 import { RawModal } from "./RawModal";
 import { TransactionsTableColumns } from "../helpers/TransactionsTableColumns";
-import { Columns } from "../@types/react-table";
+import { BPDTransaction } from "../../generated/definitions/BPDTransaction";
 
 type Props = {
   transactionsList: BPDTransactionList;
@@ -21,7 +21,7 @@ export const TransactionsTable: React.FunctionComponent<Props> = ({
   const { t } = useTranslation();
   const [modalState, setModalstate] = useState<boolean>(false);
   const [modalContent, setModalcontent] = useState<string>("");
-  const data = React.useMemo(() => transactionsList.transactions, []);
+  const data = React.useMemo(() => [...transactionsList.transactions], []);
   const columnsDefinition = TransactionsTableColumns();
   const columns = React.useMemo(() => columnsDefinition, []);
 
@@ -31,7 +31,7 @@ export const TransactionsTable: React.FunctionComponent<Props> = ({
     rows,
     prepareRow,
     visibleColumns
-  } = useTable(
+  } = useTable<BPDTransaction>(
     {
       columns,
       data,
@@ -114,7 +114,7 @@ export const TransactionsTable: React.FunctionComponent<Props> = ({
                   <span>
                     {column.isSorted ? (column.isSortedDesc ? " ↓" : " ↑") : ""}
                   </span>
-                  <Filter column={column} />
+                  <div>{column.canFilter ? column.render("Filter") : null}</div>
                 </th>
               ))}
             </tr>
