@@ -34,8 +34,10 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
   const [modalContent, setModalcontent] = useState<string>("");
   const [resultErr, setResulterr] = useState<string>("");
 
-  function popModal(data: object): void {
-    setModalcontent(JSON.stringify(data, null, 3));
+  function popModal(data?: object): void {
+    setModalcontent(
+      data === undefined ? "undefined" : JSON.stringify(data, null, 3)
+    );
     setModalstate(!modalState);
   }
 

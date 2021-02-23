@@ -27,13 +27,12 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
   }
 
   useEffect(() => {
-    if (props.wallet) {
-      const walletHash = props.wallet?.data.reduce(
+    setWalletInfo(
+      props.wallet?.data.reduce(
         (obj, item) => ({ ...obj, [item.hpan]: item }),
-        {}
-      );
-      setWalletInfo(walletHash);
-    }
+        {} as Record<string, PublicWalletItem>
+      )
+    );
   }, [props.wallet]);
 
   const { t } = useTranslation();

@@ -29,6 +29,7 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
   const [resultDataWallet, setResultdataWallet] = useState<Wallet | undefined>(
     undefined
   );
+  const [resultErrWallet, setResulterrWalletWallet] = useState<string>("");
 
   function popModal(data: object): void {
     setModalcontent(JSON.stringify(data, null, 3));
@@ -61,10 +62,19 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
         if (_.status === 200) {
           setResultdataWallet(_.value);
         }
+        if (_.status === 404) {
+          setResulterrWallet(`404, ${t("Error 404")} "${getCitizenId()}"`);
+        }
+        if (_.status === 429) {
+          setResulterrWallet(`429, ${t("Error 429")}`);
+        }
+        if (_.status === 500) {
+          setResulterrWallet(`500, ${t("Error 500")}`);
+        }
       })
       .run()
       .catch(_ => {
-        // TODO: Validation Error
+        setResulterrWallet(_.value);
       });
   }, []);
 
@@ -166,6 +176,11 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
               </ul>
             </div>
           </div>
+          {resultErrWallet && (
+            <div className="alert alert-warning">
+              <p className="m-0">PM API: {resultErrWallet}</p>
+            </div>
+          )}
           {props.resultData.payment_methods.length > 0 && (
             <Paymethods
               paylist={props.resultData.payment_methods}
