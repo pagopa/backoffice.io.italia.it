@@ -22,6 +22,7 @@ const resources = {
       "Error 403 authorization":
         "You do not have enough permission to complete the operation",
       "Error 404": "No match found with",
+      "Error 429": "Rate limit exceeded",
       "Error 500": "Generic error",
       Detail: "See detail",
       "Transactions list": "Transactions list",
@@ -87,6 +88,7 @@ const resources = {
       "Error 403 authorization":
         "Non hai sufficienti permessi per completare l'operazione",
       "Error 404": "Nessuna corrispondenza trovata con il codice",
+      "Error 429": "Raggiunto il limite di chiamate all'API",
       "Error 500": "Errore generico",
       Detail: "Visualizza dettaglio",
       "Transactions list": "Lista transazioni",
