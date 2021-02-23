@@ -64,7 +64,9 @@ const resources = {
       Grace: "Grace",
       Revert: "Revert",
       Search: "Search",
-      TransactionTableDesc: "Click the column's name to sort data"
+      TransactionTableDesc: "Click the column's name to sort data",
+      "Circuit Brand": "Circuit Brand",
+      "Masked PAN": "Masked PAN"
     }
   },
   it: {
@@ -127,7 +129,9 @@ const resources = {
       Grace: "Tolleranza",
       Revert: "Storno",
       Search: "Cerca",
-      TransactionTableDesc: "Clicca sul nome della colonna per ordinare i dati"
+      TransactionTableDesc: "Clicca sul nome della colonna per ordinare i dati",
+      "Circuit Brand": "Marchio circuito",
+      "Masked PAN": "PAN offuscato"
     }
   }
 };
