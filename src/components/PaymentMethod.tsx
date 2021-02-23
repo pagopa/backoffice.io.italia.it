@@ -117,12 +117,25 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
             </>
           )}
           <div className="col-12 py-2"></div>
-          <div className="col-sm-2 font-weight-bold">HPAN</div>
+          <div className="col-sm-2 font-weight-bold">
+            HPAN
+            {props.walletItemInfo && (
+              <button
+                className="btn btn-sm btn-primary"
+                onClick={() => {
+                  popModal(props.walletItemInfo);
+                }}
+              >
+                RAW
+              </button>
+            )}
+          </div>
           <div className="col-sm-10 text-break">
             {props.el.payment_instrument_hpan.slice(0, -5)}
             <u>{props.el.payment_instrument_hpan.slice(-5)}</u>
           </div>
         </div>
+
         {resultData && (
           <PaymentMethodHistory
             el={resultData}
