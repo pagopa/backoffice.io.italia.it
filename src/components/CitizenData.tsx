@@ -29,7 +29,7 @@ export const CitizenData: React.FunctionComponent<CitizenDataProps> = props => {
   const [resultDataWallet, setResultdataWallet] = useState<Wallet | undefined>(
     undefined
   );
-  const [resultErrWallet, setResulterrWalletWallet] = useState<string>("");
+  const [resultErrWallet, setResulterrWallet] = useState<string>("");
 
   function popModal(data: object): void {
     setModalcontent(JSON.stringify(data, null, 3));
