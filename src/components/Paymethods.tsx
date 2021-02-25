@@ -7,7 +7,8 @@ import { PaymentMethod as PaymentMethodDef } from "../../generated/definitions/P
 import { Wallet as WalletDef } from "../../generated/definitions/Wallet";
 import { PublicWalletItem } from "../../generated/definitions/PublicWalletItem";
 import classNames from "classnames";
-import { PublicCreditCard } from "../../generated/definitions/PublicCreditCard";
+import { OrphanPaymethods } from "./OrphanPaymethods";
+import { renderPAN } from "../helpers/utils";
 
 type PaymethodsProps = {
   paylist: ReadonlyArray<PaymentMethodDef>;
@@ -20,12 +21,6 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
     Record<string, PublicWalletItem> | undefined
   >(undefined);
 
-  function renderPAN(walletItem: PublicWalletItem): string {
-    return PublicCreditCard.is(walletItem)
-      ? ` | *${walletItem.masked_pan}`
-      : `| ${walletItem.type}`;
-  }
-
   useEffect(() => {
     setWalletInfo(
       props.wallet?.data.reduce(
@@ -34,6 +29,11 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
       )
     );
   }, [props.wallet]);
+
+  const paylistReduced = props.paylist.reduce(
+    (obj, item) => ({ ...obj, [item.payment_instrument_hpan]: item }),
+    {} as Record<string, PaymentMethodDef>
+  );
 
   const { t } = useTranslation();
 
@@ -68,6 +68,7 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
                 <div>
                   *{el.payment_instrument_hpan.slice(-5)}
                   {walletInfo &&
+                    walletInfo[el.payment_instrument_hpan] &&
                     renderPAN(walletInfo[el.payment_instrument_hpan])}
                 </div>
               </div>
@@ -87,6 +88,13 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
           />
         ))}
       </TabContent>
+
+      {paylistReduced && walletInfo && (
+        <OrphanPaymethods
+          paylistItems={paylistReduced}
+          walletItems={walletInfo}
+        ></OrphanPaymethods>
+      )}
     </>
   );
 };

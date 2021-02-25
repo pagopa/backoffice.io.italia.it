@@ -9,7 +9,7 @@ const resources = {
       "Find citizen": "Find citizen",
       Submit: "Submit",
       "Citizen profile": "Citizen profile",
-      "Payment methods": "Payment methods",
+      "Payment methods": "Payment methods Cashback enabled",
       "Searched string": "Searched string",
       "Fiscal code": "Fiscal code",
       "On-boarding date": "On-boarding date",
@@ -67,7 +67,8 @@ const resources = {
       Search: "Search",
       TransactionTableDesc: "Click the column's name to sort data",
       "Circuit Brand": "Circuit Brand",
-      "Masked PAN": "Masked PAN"
+      "Masked PAN": "Masked PAN",
+      "Other payment methods": "Other payment methods"
     }
   },
   it: {
@@ -75,7 +76,7 @@ const resources = {
       "Find citizen": "Cerca cittadino",
       Submit: "Invio",
       "Citizen profile": "Profilo cittadino",
-      "Payment methods": "Metodi di pagamento",
+      "Payment methods": "Metodi di pagamento Cashback",
       "Searched string": "Stringa ricercata",
       "Fiscal code": "Codice fiscale",
       "On-boarding date": "Data on-boarding",
@@ -133,7 +134,8 @@ const resources = {
       Search: "Cerca",
       TransactionTableDesc: "Clicca sul nome della colonna per ordinare i dati",
       "Circuit Brand": "Marchio circuito",
-      "Masked PAN": "PAN offuscato"
+      "Masked PAN": "PAN offuscato",
+      "Other payment methods": "Altri metodi di pagamento"
     }
   }
 };
