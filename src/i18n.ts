@@ -9,7 +9,7 @@ const resources = {
       "Find citizen": "Find citizen",
       Submit: "Submit",
       "Citizen profile": "Citizen profile",
-      "Payment methods": "Payment methods Cashback enabled",
+      "Payment methods": "Payment methods Cashback",
       "Searched string": "Searched string",
       "Fiscal code": "Fiscal code",
       "On-boarding date": "On-boarding date",

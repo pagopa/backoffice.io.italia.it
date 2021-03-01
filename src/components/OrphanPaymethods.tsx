@@ -19,7 +19,7 @@ export const OrphanPaymethods: React.FunctionComponent<PaymethodsProps> = ({
   const [modalContent, setModalcontent] = useState<string>("");
   const paylistHPANs = Object.keys(paylistItems);
   const walletHPANs = Object.keys(walletItems);
-  const orphans = walletHPANs.filter(x => !paylistHPANs.includes(x));
+  const onlyWalletHPANs = walletHPANs.filter(x => !paylistHPANs.includes(x));
 
   function popModal(data?: object): void {
     setModalcontent(
@@ -29,14 +29,14 @@ export const OrphanPaymethods: React.FunctionComponent<PaymethodsProps> = ({
   }
 
   return (
-    (orphans.length > 0 && (
+    (onlyWalletHPANs.length > 0 && (
       <>
         <RawModal state={modalState} jsonobj={modalContent} />
         <div className="mt-4 mb-2 font-weight-bold">
           {t("Other payment methods")}
         </div>
         <ul className="p-0 m-0 list-inline">
-          {orphans.map((hpan: string, index: number) => (
+          {onlyWalletHPANs.map((hpan: string, index: number) => (
             <li className="bg-light rounded p-2 list-inline-item" key={index}>
               <button
                 className="ml-2 btn btn-sm btn-primary ml-auto"
