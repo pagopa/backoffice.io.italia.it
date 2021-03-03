@@ -15,11 +15,14 @@ import { getCitizenId, getUserToken } from "../helpers/coredata";
 import { PaymentMethodHistory } from "./PaymentMethodHistory";
 import { RawModal } from "./RawModal";
 import classNames from "classnames";
+import { PublicWalletItem } from "../../generated/definitions/PublicWalletItem";
+import { PublicCreditCard } from "../../generated/definitions/PublicCreditCard";
 
 type PaymentMethodProps = {
   el: PaymentMethodDef;
   index: number;
   key?: number;
+  walletItemInfo?: PublicWalletItem;
 };
 
 export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props => {
@@ -31,8 +34,10 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
   const [modalContent, setModalcontent] = useState<string>("");
   const [resultErr, setResulterr] = useState<string>("");
 
-  function popModal(data: object): void {
-    setModalcontent(JSON.stringify(data, null, 3));
+  function popModal(data?: object): void {
+    setModalcontent(
+      data === undefined ? "undefined" : JSON.stringify(data, null, 3)
+    );
     setModalstate(!modalState);
   }
 
@@ -102,12 +107,37 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
               .map(_ => format(parseISO(_), "dd/MM/yyyy HH:mm"))
               .getOrElse("")}
           </div>
+          {props.walletItemInfo && PublicCreditCard.is(props.walletItemInfo) && (
+            <>
+              <div className="col-12 py-2"></div>
+              <div className="col-sm-2 font-weight-bold">
+                {t("Circuit Brand")}
+              </div>
+              <div className="col-sm-4">{props.walletItemInfo.brand}</div>
+              <div className="col-sm-2 font-weight-bold">{t("Masked PAN")}</div>
+              <div className="col-sm-4">*{props.walletItemInfo.masked_pan}</div>
+            </>
+          )}
           <div className="col-12 py-2"></div>
-          <div className="col-sm-2 font-weight-bold">HPAN</div>
+          <div className="col-sm-2 font-weight-bold">
+            HPAN
+            {props.walletItemInfo && (
+              <button
+                className="btn btn-sm btn-primary"
+                onClick={() => {
+                  popModal(props.walletItemInfo);
+                }}
+              >
+                RAW
+              </button>
+            )}
+          </div>
           <div className="col-sm-10 text-break">
-            {props.el.payment_instrument_hpan}
+            {props.el.payment_instrument_hpan.slice(0, -5)}
+            <u>{props.el.payment_instrument_hpan.slice(-5)}</u>
           </div>
         </div>
+
         {resultData && (
           <PaymentMethodHistory
             el={resultData}
