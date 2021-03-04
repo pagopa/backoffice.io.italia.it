@@ -82,6 +82,7 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
             el={el}
             index={index}
             key={index}
+            wallet={props.wallet}
             walletItemInfo={
               walletInfo && walletInfo[el.payment_instrument_hpan]
             }
