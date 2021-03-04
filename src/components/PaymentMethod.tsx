@@ -18,6 +18,7 @@ import classNames from "classnames";
 import { PublicWalletItem } from "../../generated/definitions/PublicWalletItem";
 import { PublicCreditCard } from "../../generated/definitions/PublicCreditCard";
 import { Wallet } from "../../generated/definitions/Wallet";
+import { filterWallet } from "../helpers/utils";
 
 type PaymentMethodProps = {
   el: PaymentMethodDef;
@@ -49,10 +50,7 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
   useEffect(() => {
     if (props.wallet && props.el) {
       setWalletFilteredByHpan(
-        props.wallet.data.filter(
-          (item: PublicWalletItem) =>
-            item.hpan === props.el.payment_instrument_hpan
-        )
+        filterWallet(props.wallet, props.el.payment_instrument_hpan)
       );
     }
   }, [props.wallet]);

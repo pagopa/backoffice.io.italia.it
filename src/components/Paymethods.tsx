@@ -94,6 +94,7 @@ export const Paymethods: React.FunctionComponent<PaymethodsProps> = props => {
         <OrphanPaymethods
           paylistItems={paylistReduced}
           walletItems={walletInfo}
+          wallet={props.wallet}
         ></OrphanPaymethods>
       )}
     </>
