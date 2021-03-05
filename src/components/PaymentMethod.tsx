@@ -17,12 +17,15 @@ import { RawModal } from "./RawModal";
 import classNames from "classnames";
 import { PublicWalletItem } from "../../generated/definitions/PublicWalletItem";
 import { PublicCreditCard } from "../../generated/definitions/PublicCreditCard";
+import { Wallet } from "../../generated/definitions/Wallet";
+import { filterWallet } from "../helpers/utils";
 
 type PaymentMethodProps = {
   el: PaymentMethodDef;
   index: number;
   key?: number;
   walletItemInfo?: PublicWalletItem;
+  wallet?: Wallet;
 };
 
 export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props => {
@@ -33,6 +36,9 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
   const [modalState, setModalstate] = useState<boolean>(false);
   const [modalContent, setModalcontent] = useState<string>("");
   const [resultErr, setResulterr] = useState<string>("");
+  const [walletFilteredByHpan, setWalletFilteredByHpan] = useState<
+    ReadonlyArray<PublicWalletItem>
+  >([]);
 
   function popModal(data?: object): void {
     setModalcontent(
@@ -40,6 +46,14 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
     );
     setModalstate(!modalState);
   }
+
+  useEffect(() => {
+    if (props.wallet && props.el) {
+      setWalletFilteredByHpan(
+        filterWallet(props.wallet, props.el.payment_instrument_hpan)
+      );
+    }
+  }, [props.wallet]);
 
   useEffect(() => {
     tryCatch(
@@ -121,15 +135,21 @@ export const PaymentMethod: React.FunctionComponent<PaymentMethodProps> = props 
           <div className="col-12 py-2"></div>
           <div className="col-sm-2 font-weight-bold">
             HPAN
-            {props.walletItemInfo && (
-              <button
-                className="btn btn-sm btn-primary"
-                onClick={() => {
-                  popModal(props.walletItemInfo);
-                }}
-              >
-                RAW
-              </button>
+            {walletFilteredByHpan.length > 1 && (
+              <span className="p-1 alert alert-danger ml-1">!</span>
+            )}{" "}
+            {Array.from(walletFilteredByHpan).map(
+              (item: PublicWalletItem, index: number) => (
+                <button
+                  key={index}
+                  className="btn btn-sm btn-primary mb-1"
+                  onClick={() => {
+                    popModal(item);
+                  }}
+                >
+                  RAW
+                </button>
+              )
             )}
           </div>
           <div className="col-sm-10 text-break">

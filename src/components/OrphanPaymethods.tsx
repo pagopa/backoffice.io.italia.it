@@ -4,15 +4,19 @@ import { PublicWalletItem } from "../../generated/definitions/PublicWalletItem";
 import { RawModal } from "./RawModal";
 import { useTranslation } from "react-i18next";
 import { renderPAN } from "../helpers/utils";
+import { Wallet } from "../../generated/definitions/Wallet";
+import { filterWallet } from "../helpers/utils";
 
 type PaymethodsProps = {
   paylistItems: Record<string, PaymentMethod>;
   walletItems: Record<string, PublicWalletItem>;
+  wallet?: Wallet;
 };
 
 export const OrphanPaymethods: React.FunctionComponent<PaymethodsProps> = ({
   paylistItems,
-  walletItems
+  walletItems,
+  wallet
 }) => {
   const { t } = useTranslation();
   const [modalState, setModalstate] = useState<boolean>(false);
@@ -38,17 +42,26 @@ export const OrphanPaymethods: React.FunctionComponent<PaymethodsProps> = ({
         <ul className="p-0 m-0 list-inline">
           {onlyWalletHPANs.map((hpan: string, index: number) => (
             <li className="bg-light rounded p-2 list-inline-item" key={index}>
-              <button
-                className="ml-2 btn btn-sm btn-primary ml-auto"
-                onClick={() => {
-                  popModal(walletItems[hpan]);
-                }}
-              >
-                RAW
-              </button>
-              <span className="ml-2">{`*${hpan.slice(-5)} ${renderPAN(
-                walletItems[hpan]
-              )}`}</span>
+              <span className="ml-2">
+                {wallet && filterWallet(wallet, hpan).length > 1 && (
+                  <span className="p-1 alert alert-danger mr-1">!</span>
+                )}
+                {`*${hpan.slice(-5)} ${renderPAN(walletItems[hpan])}`}
+              </span>
+              {wallet &&
+                Array.from(filterWallet(wallet, hpan)).map(
+                  (item: PublicWalletItem, indexBtn: number) => (
+                    <button
+                      key={indexBtn}
+                      className="btn btn-sm btn-primary mb-1 ml-1"
+                      onClick={() => {
+                        popModal(item);
+                      }}
+                    >
+                      RAW
+                    </button>
+                  )
+                )}
             </li>
           ))}
         </ul>
